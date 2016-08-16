@@ -1,6 +1,0 @@
-use_frameworks!
-target 'QiitaApiClient_Tests' do
-  pod 'QiitaApiClient', :path => '../'
-  
-  
-end

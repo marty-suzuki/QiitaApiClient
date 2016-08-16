@@ -1,0 +1,6 @@
+framework module Pods_QiitaApiClientSample {
+  umbrella header "Pods-QiitaApiClientSample-umbrella.h"
+
+  export *
+  module * { export * }
+}

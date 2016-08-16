@@ -1,0 +1,14 @@
+PODS:
+  - QiitaApiClient (0.1.0)
+
+DEPENDENCIES:
+  - QiitaApiClient (from `../`)
+
+EXTERNAL SOURCES:
+  QiitaApiClient:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  QiitaApiClient: 9eb2f3e2b99b878973a2d482954155d90edd9d40
+
+COCOAPODS: 0.39.0

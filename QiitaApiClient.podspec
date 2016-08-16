@@ -21,17 +21,17 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://github.com/<GITHUB_USERNAME>/QiitaApiClient'
+  s.homepage         = 'https://github.com/szk-atmosphere/QiitaApiClient'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'szk-atmosphere' => 's1180183@gmail.com' }
-  s.source           = { :git => 'https://github.com/<GITHUB_USERNAME>/QiitaApiClient.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.source           = { :git => 'https://github.com/szk-atmosphere/QiitaApiClient.git', :tag => s.version.to_s }
+  s.social_media_url = 'https://twitter.com/SzkAtmosphere'
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'QiitaApiClient/Classes/**/*'
-  
+  s.source_files = 'QiitaApiClient/*.{swift}'
+
   # s.resource_bundles = {
   #   'QiitaApiClient' => ['QiitaApiClient/Assets/*.png']
   # }

@@ -1,0 +1,6 @@
+framework module QiitaApiClient {
+  umbrella header "QiitaApiClient-umbrella.h"
+
+  export *
+  module * { export * }
+}
