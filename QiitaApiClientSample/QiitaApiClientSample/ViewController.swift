@@ -11,12 +11,12 @@ import QiitaApiClient
 
 class ViewController: UIViewController {
 
+    var loaded = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let scope: QiitaAuthorizeScope = [.WriteQiita, .All]
-        print(scope.stringValue)
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,6 +24,14 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if loaded { return }
+        loaded = true
+        QiitaApiClient.sharedClient.request(.Get(.AuthenticatedUser), success: { dict in
+            print(dict)
+        }, failure: nil)
+    }
 }
 

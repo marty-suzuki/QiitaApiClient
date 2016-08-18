@@ -43,5 +43,21 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>QiitaApplicaiontInfo</key>
+	<dict>
+		<key>client_secret</key>
+		<string></string>
+		<key>redirect_url</key>
+		<string></string>
+		<key>client_id</key>
+		<string></string>
+		<key>scope</key>
+		<array>
+			<string>read_qiita</string>
+			<string>read_qiita_team</string>
+			<string>write_qiita</string>
+			<string>write_qiita_team</string>
+		</array>
+	</dict>
 </dict>
 </plist>

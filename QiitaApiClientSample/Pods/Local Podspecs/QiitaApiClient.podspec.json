@@ -19,5 +19,14 @@
   "platforms": {
     "ios": "8.0"
   },
-  "source_files": "QiitaApiClient/*.{swift}"
+  "source_files": "QiitaApiClient/*.{swift}",
+  "frameworks": [
+    "UIKit",
+    "WebKit"
+  ],
+  "dependencies": {
+    "MisterFusion": [
+      "~> 1.2"
+    ]
+  }
 }
