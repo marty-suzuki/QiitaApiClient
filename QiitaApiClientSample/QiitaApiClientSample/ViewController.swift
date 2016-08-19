@@ -29,8 +29,8 @@ class ViewController: UIViewController {
         
         if loaded { return }
         loaded = true
-        QiitaApiClient.sharedClient.request(.Get(.AuthenticatedUser), success: { dict in
-            print(dict)
+        QiitaApiClient.sharedClient.request(.Get(.AuthenticatedUser), success: { (model: QiitaAuthenticatedUser) in
+            print(model)
         }, failure: nil)
     }
 }

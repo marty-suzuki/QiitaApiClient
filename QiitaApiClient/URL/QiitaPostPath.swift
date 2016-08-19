@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum QiitaPostPath: PathStringReturnable {
+public enum QiitaPostPath: QiitaPathStringReturnable {
     case AccessTokens(clientId: String, clientSecret: String, code: String)
     
     var pathString: String {

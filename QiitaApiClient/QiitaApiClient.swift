@@ -15,15 +15,13 @@ public class QiitaApiClient {
     
     private init() {}
     
-    private func checkAccessToken(completion: (() -> ())) {
+    private func checkCode(success: (() -> ())?, failure: (NSError -> ())?) {
         if let _ = QiitaApplicationInfo.sharedInfo.code {
-            completion()
+            success?()
             return
         }
         showAuthorizeViewController() { [weak self] in
-            self?.accessToken({
-                completion()
-            }, failure: nil)
+            self?.accessToken(success, failure: failure)
         }
     }
     
@@ -37,40 +35,43 @@ public class QiitaApiClient {
         viewController?.presentViewController(authorizeVC, animated: true, completion: nil)
     }
     
-    private func httpRequest(request: NSMutableURLRequest, success: ([String : NSObject] -> ())?, failure: (NSError -> ())?) {
-        print(request.URL?.absoluteString)
-        print(request.allHTTPHeaderFields)
-        let task = session.dataTaskWithRequest(request) { [weak self] data, response, error in
-            if let error = error {
+    private func httpRequest<T: QiitaModel>(request: NSMutableURLRequest, success: (T -> ())?, failure: (NSError -> ())?) {
+        let task = session.dataTaskWithRequest(request) { [weak self] in
+            if let error = $0.2 {
                 failure?(error)
                 return
             }
-            guard let data = data else {
-                return
-            }
-            guard let response = response as? NSHTTPURLResponse else {
+            guard
+                let data = $0.0,
+                let response = $0.1 as? NSHTTPURLResponse
+            else {
+                failure?(NSError(domain: "invalid response data", code: 10001, userInfo: nil))
                 return
             }
             
             if response.statusCode == 401 {
                 dispatch_async(dispatch_get_main_queue()) {
-                    self?.showAuthorizeViewController {
-                        self?.accessToken({
+                    self?.showAuthorizeViewController { [weak self] in
+                        self?.accessToken({ [weak self] in
                             if let accessToken = QiitaApplicationInfo.sharedInfo.accessToken {
                                 request.setAccessToken(accessToken)
                             }
                             self?.httpRequest(request, success: success, failure: failure)
-                        }, failure: nil)
+                        }, failure: failure)
                     }
                 }
                 return
             }
             
             do {
-                guard let dict = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) as? [String : NSObject] else {
+                guard
+                    let dictionary = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) as? [String : NSObject],
+                    let model = T(dictionary: dictionary)
+                else {
+                    failure?(NSError(domain: "invalid response data", code: 10001, userInfo: nil))
                     return
                 }
-                success?(dict)
+                success?(model)
             } catch let e as NSError {
                 failure?(e)
             }
@@ -79,19 +80,23 @@ public class QiitaApiClient {
         task.resume()
     }
     
-    public func request(method: QiitaHttpMethod, success: ([String : NSObject] -> ())?, failure: (NSError -> ())?) {
-        checkAccessToken { [weak self] in
+    public func request<T: QiitaModel>(method: QiitaHttpMethod, success: (T -> ())?, failure: (NSError -> ())?) {
+        checkCode({ [weak self] in
             guard let urlRequest = NSMutableURLRequest(method: method) else { return }
             self?.httpRequest(urlRequest, success: success, failure: failure)
-        }
+        }, failure: failure)
     }
     
     func accessToken(success: (() -> ())?, failure: (NSError -> ())?) {
         let info = QiitaApplicationInfo.sharedInfo
-        guard let code = info.code else { return }
-        request(.Post(.AccessTokens(clientId: info.clientId, clientSecret: info.clientSecret, code: code)), success: { dict in
-            QiitaApplicationInfo.sharedInfo.accessToken = dict["token"] as? String
+        guard let code = info.code else {
+            failure?(NSError(domain: "can not find code", code: 10002, userInfo: nil))
+            return
+        }
+        let setAccessToken: QiitaAccessToken -> () = {
+            QiitaApplicationInfo.sharedInfo.accessToken = $0.token
             success?()
-        }, failure: failure)
+        }
+        request(.Post(.AccessTokens(clientId: info.clientId, clientSecret: info.clientSecret, code: code)), success: setAccessToken, failure: failure)
     }
 }

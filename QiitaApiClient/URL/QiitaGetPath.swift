@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum QiitaGetPath: PathStringReturnable {
+public enum QiitaGetPath: QiitaPathStringReturnable {
     case QauthAuthorize(clientId: String, scope: String, state: String?)
     case AuthenticatedUser
     

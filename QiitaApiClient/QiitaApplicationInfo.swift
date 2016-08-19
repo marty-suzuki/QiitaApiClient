@@ -9,13 +9,6 @@
 import Foundation
 
 class QiitaApplicationInfo {
-    private enum QiitaAuthorizeScope: String {
-        case ReadQiita      = "read_qiita"
-        case ReadQiitaTeam  = "read_qiita_team"
-        case WriteQiita     = "write_qiita"
-        case WriteQiitaTeam = "write_qiita_team"
-    }
-    
     private struct Const {
         static let QiitaCodeKey = "qiita_code"
         static let QiitaAccessTokenKey = "qiita_access_token"
