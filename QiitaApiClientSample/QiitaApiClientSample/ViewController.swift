@@ -31,7 +31,11 @@ class ViewController: UIViewController {
         loaded = true
         QiitaApiClient.sharedClient.request(.Get(.AuthenticatedUser), success: { (model: QiitaAuthenticatedUser) in
             print(model)
-        }, failure: nil)
+        }, failure: { print($0) })
+        
+        QiitaApiClient.sharedClient.request(.Get(.ItemsItemIdComments(itemId: "461eafef4af38d119818")), success: { (models: [QiitaComment]) in
+            print(models)
+        }, failure: { print($0) })
     }
 }
 

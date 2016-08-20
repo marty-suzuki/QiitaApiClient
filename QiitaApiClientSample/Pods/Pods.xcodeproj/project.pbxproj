@@ -7,11 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		09F23137B537ACB89F891541CDF56820 /* NSMutableURLRequest+QiitaApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E891A436719D9A3C790755A8BDC16059 /* NSMutableURLRequest+QiitaApiClient.swift */; };
 		1E16549E37BA9A374637F4E1CBE482CB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 420057203003035DB4A4C685FC1B3D5A /* UIKit.framework */; };
 		22636CE1C55E8CA607798DEEABC3E8B7 /* MisterFusion-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 875FB32E7571C9F7C0CFDFC326F001D9 /* MisterFusion-dummy.m */; };
 		2DAE7A422CD78A7132FBC3B3892116FA /* MisterFusion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4088D047289A0B346219868CDB5DDC /* MisterFusion.framework */; };
 		37A003E21D677D1C001FC5EC /* QiitaDeletePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A003E11D677D1C001FC5EC /* QiitaDeletePath.swift */; };
+		37A003E41D689E48001FC5EC /* QiitaUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A003E31D689E48001FC5EC /* QiitaUser.swift */; };
+		37A003E61D689F44001FC5EC /* QiitaLike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A003E51D689F44001FC5EC /* QiitaLike.swift */; };
+		37A003EC1D68A047001FC5EC /* NSDate+ISO8601.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A003EA1D68A047001FC5EC /* NSDate+ISO8601.swift */; };
+		37A003ED1D68A047001FC5EC /* NSMutableURLRequest+QiitaApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A003EB1D68A047001FC5EC /* NSMutableURLRequest+QiitaApiClient.swift */; };
+		37A003EF1D68A1EA001FC5EC /* QiitaTeamGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A003EE1D68A1EA001FC5EC /* QiitaTeamGroup.swift */; };
+		37A003F11D68A313001FC5EC /* QiitaComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A003F01D68A313001FC5EC /* QiitaComment.swift */; };
+		37A003F31D68A51E001FC5EC /* QiitaPatchPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A003F21D68A51E001FC5EC /* QiitaPatchPath.swift */; };
+		37A003F71D68A5C7001FC5EC /* QiitaPutPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A003F61D68A5C7001FC5EC /* QiitaPutPath.swift */; };
+		37A003F91D68A89E001FC5EC /* QiitaTagging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A003F81D68A89E001FC5EC /* QiitaTagging.swift */; };
+		37A003FB1D68AA6A001FC5EC /* QiitaTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A003FA1D68AA6A001FC5EC /* QiitaTag.swift */; };
+		37A003FD1D68B8EA001FC5EC /* QiitaTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A003FC1D68B8EA001FC5EC /* QiitaTeam.swift */; };
+		37A003FF1D68B9C1001FC5EC /* QiitaTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A003FE1D68B9C1001FC5EC /* QiitaTemplate.swift */; };
+		37A004031D68D981001FC5EC /* NSError+QiitaApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A004021D68D981001FC5EC /* NSError+QiitaApiClient.swift */; };
+		37A004051D68DD18001FC5EC /* NSHTTPURLResponse+QiitaApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A004041D68DD18001FC5EC /* NSHTTPURLResponse+QiitaApiClient.swift */; };
 		43CBA0F7E0E53C5FCF71F4C7ADA23672 /* QiitaAuthorizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB8B83C557C2233E233FC9B318F4A76 /* QiitaAuthorizeViewController.swift */; };
 		48D11A8933BBA1483CD52A6483F8133B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E6111C932CC1805AF5BBF6757DF4D1C /* Foundation.framework */; };
 		53B447508A30FCF641F97D45A36A8A0D /* QiitaAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90B8B8CFB8F436F9A909B75F5BBE16A /* QiitaAccessToken.swift */; };
@@ -73,6 +86,20 @@
 		2E49A6B14CED90610B0732C0052B92CE /* QiitaGetPath.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QiitaGetPath.swift; sourceTree = "<group>"; };
 		36C27A1F4223A3D7C5FEE6C79814CB65 /* QittaPathStringReturnable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QittaPathStringReturnable.swift; sourceTree = "<group>"; };
 		37A003E11D677D1C001FC5EC /* QiitaDeletePath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiitaDeletePath.swift; sourceTree = "<group>"; };
+		37A003E31D689E48001FC5EC /* QiitaUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiitaUser.swift; sourceTree = "<group>"; };
+		37A003E51D689F44001FC5EC /* QiitaLike.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiitaLike.swift; sourceTree = "<group>"; };
+		37A003EA1D68A047001FC5EC /* NSDate+ISO8601.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+ISO8601.swift"; sourceTree = "<group>"; };
+		37A003EB1D68A047001FC5EC /* NSMutableURLRequest+QiitaApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSMutableURLRequest+QiitaApiClient.swift"; sourceTree = "<group>"; };
+		37A003EE1D68A1EA001FC5EC /* QiitaTeamGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiitaTeamGroup.swift; sourceTree = "<group>"; };
+		37A003F01D68A313001FC5EC /* QiitaComment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiitaComment.swift; sourceTree = "<group>"; };
+		37A003F21D68A51E001FC5EC /* QiitaPatchPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiitaPatchPath.swift; sourceTree = "<group>"; };
+		37A003F61D68A5C7001FC5EC /* QiitaPutPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiitaPutPath.swift; sourceTree = "<group>"; };
+		37A003F81D68A89E001FC5EC /* QiitaTagging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiitaTagging.swift; sourceTree = "<group>"; };
+		37A003FA1D68AA6A001FC5EC /* QiitaTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiitaTag.swift; sourceTree = "<group>"; };
+		37A003FC1D68B8EA001FC5EC /* QiitaTeam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiitaTeam.swift; sourceTree = "<group>"; };
+		37A003FE1D68B9C1001FC5EC /* QiitaTemplate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiitaTemplate.swift; sourceTree = "<group>"; };
+		37A004021D68D981001FC5EC /* NSError+QiitaApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+QiitaApiClient.swift"; sourceTree = "<group>"; };
+		37A004041D68DD18001FC5EC /* NSHTTPURLResponse+QiitaApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSHTTPURLResponse+QiitaApiClient.swift"; sourceTree = "<group>"; };
 		385A0D2BDFBCAE996A9AFA84694F36C7 /* Pods-QiitaApiClientSample-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-QiitaApiClientSample-frameworks.sh"; sourceTree = "<group>"; };
 		3A79C565779D7F5EB4FC170D49305AC6 /* Pods-QiitaApiClientSample-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-QiitaApiClientSample-umbrella.h"; sourceTree = "<group>"; };
 		420057203003035DB4A4C685FC1B3D5A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -103,7 +130,6 @@
 		D0028AD92BEB6711AE873F6A24F06FF7 /* MisterFusion-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MisterFusion-umbrella.h"; sourceTree = "<group>"; };
 		DE503BB9FA087B4D1044E89C0F02C1DA /* Array+MisterFusion.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Array+MisterFusion.swift"; path = "MisterFusion/Array+MisterFusion.swift"; sourceTree = "<group>"; };
 		E0CB291534444637CB266FB4F71017E5 /* QiitaApiClient-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "QiitaApiClient-prefix.pch"; sourceTree = "<group>"; };
-		E891A436719D9A3C790755A8BDC16059 /* NSMutableURLRequest+QiitaApiClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "NSMutableURLRequest+QiitaApiClient.swift"; sourceTree = "<group>"; };
 		ECDD181C7AD97A9DC773D5DD5648D60E /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F5F0646FCB22A73B26B5AABE857713BF /* MisterFusion-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MisterFusion-prefix.pch"; sourceTree = "<group>"; };
 		F9B51027E064FD88CA7143A61C64CA52 /* QiitaHttpMethod.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QiitaHttpMethod.swift; sourceTree = "<group>"; };
@@ -162,15 +188,27 @@
 		3010F92EB56BD223DB5B62CFE7A34B08 /* URL */ = {
 			isa = PBXGroup;
 			children = (
-				E891A436719D9A3C790755A8BDC16059 /* NSMutableURLRequest+QiitaApiClient.swift */,
 				36C27A1F4223A3D7C5FEE6C79814CB65 /* QittaPathStringReturnable.swift */,
 				2E49A6B14CED90610B0732C0052B92CE /* QiitaGetPath.swift */,
 				F9B51027E064FD88CA7143A61C64CA52 /* QiitaHttpMethod.swift */,
 				2228A39F5EFBFDC8CD4E9C9E296E38BF /* QiitaPostPath.swift */,
 				7CDFF36A8A3F493D76A1E2C60F7B3262 /* QiitaURLQueryParameter.swift */,
 				37A003E11D677D1C001FC5EC /* QiitaDeletePath.swift */,
+				37A003F21D68A51E001FC5EC /* QiitaPatchPath.swift */,
+				37A003F61D68A5C7001FC5EC /* QiitaPutPath.swift */,
 			);
 			path = URL;
+			sourceTree = "<group>";
+		};
+		37A003E91D68A047001FC5EC /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				37A003EA1D68A047001FC5EC /* NSDate+ISO8601.swift */,
+				37A003EB1D68A047001FC5EC /* NSMutableURLRequest+QiitaApiClient.swift */,
+				37A004021D68D981001FC5EC /* NSError+QiitaApiClient.swift */,
+				37A004041D68DD18001FC5EC /* NSHTTPURLResponse+QiitaApiClient.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		3BA1C64B92291EEB2678D8D8A8ECE155 /* Frameworks */ = {
@@ -214,6 +252,14 @@
 				B90B8B8CFB8F436F9A909B75F5BBE16A /* QiitaAccessToken.swift */,
 				A7568ADA05626A07554CD96449CDFADE /* QiitaAuthenticatedUser.swift */,
 				5D770EB8F03CD9E14A59A223034C5A71 /* QiitaModel.swift */,
+				37A003E31D689E48001FC5EC /* QiitaUser.swift */,
+				37A003E51D689F44001FC5EC /* QiitaLike.swift */,
+				37A003EE1D68A1EA001FC5EC /* QiitaTeamGroup.swift */,
+				37A003F01D68A313001FC5EC /* QiitaComment.swift */,
+				37A003F81D68A89E001FC5EC /* QiitaTagging.swift */,
+				37A003FA1D68AA6A001FC5EC /* QiitaTag.swift */,
+				37A003FC1D68B8EA001FC5EC /* QiitaTeam.swift */,
+				37A003FE1D68B9C1001FC5EC /* QiitaTemplate.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -299,6 +345,7 @@
 		FF416C0F8B23BAEB4BE38AD4768117E6 /* QiitaApiClient */ = {
 			isa = PBXGroup;
 			children = (
+				37A003E91D68A047001FC5EC /* Extension */,
 				99C27517DA7ABCAD0B3D1366F889725F /* QiitaApiClient.swift */,
 				879C631B8E90328F225B0C5168909CFE /* QiitaApplicationInfo.swift */,
 				6CB8B83C557C2233E233FC9B318F4A76 /* QiitaAuthorizeViewController.swift */,
@@ -433,20 +480,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09F23137B537ACB89F891541CDF56820 /* NSMutableURLRequest+QiitaApiClient.swift in Sources */,
+				37A004031D68D981001FC5EC /* NSError+QiitaApiClient.swift in Sources */,
+				37A003FB1D68AA6A001FC5EC /* QiitaTag.swift in Sources */,
+				37A003FD1D68B8EA001FC5EC /* QiitaTeam.swift in Sources */,
 				8EFCC9FC27C36782CACC60ED336BC17E /* QittaPathStringReturnable.swift in Sources */,
 				53B447508A30FCF641F97D45A36A8A0D /* QiitaAccessToken.swift in Sources */,
+				37A003F11D68A313001FC5EC /* QiitaComment.swift in Sources */,
+				37A003EC1D68A047001FC5EC /* NSDate+ISO8601.swift in Sources */,
 				C9565CF51D3432DAAEFE0E687472796C /* QiitaAuthenticatedUser.swift in Sources */,
 				68A2329ACD301B4D7D8C0EDED108A53F /* QiitaApiClient-dummy.m in Sources */,
+				37A003E41D689E48001FC5EC /* QiitaUser.swift in Sources */,
+				37A003FF1D68B9C1001FC5EC /* QiitaTemplate.swift in Sources */,
 				8CEDC072069EEC65664B568A4B6D71E4 /* QiitaApiClient.swift in Sources */,
+				37A003E61D689F44001FC5EC /* QiitaLike.swift in Sources */,
 				5CF30FBFBD9A168E71A2202FA9671ECE /* QiitaModel.swift in Sources */,
 				D8FD07146FA0CCF8A8B28EBB3822762F /* QiitaApplicationInfo.swift in Sources */,
 				43CBA0F7E0E53C5FCF71F4C7ADA23672 /* QiitaAuthorizeViewController.swift in Sources */,
+				37A004051D68DD18001FC5EC /* NSHTTPURLResponse+QiitaApiClient.swift in Sources */,
 				76209CEA779FC353F1F299BD7851A4D4 /* QiitaGetPath.swift in Sources */,
 				37A003E21D677D1C001FC5EC /* QiitaDeletePath.swift in Sources */,
+				37A003ED1D68A047001FC5EC /* NSMutableURLRequest+QiitaApiClient.swift in Sources */,
 				A28B4A2246DCEAC2368CC5B410E408CD /* QiitaHttpMethod.swift in Sources */,
+				37A003F31D68A51E001FC5EC /* QiitaPatchPath.swift in Sources */,
+				37A003EF1D68A1EA001FC5EC /* QiitaTeamGroup.swift in Sources */,
 				9103B4B36B7788FA06785F633DB1C0B0 /* QiitaPostPath.swift in Sources */,
 				B9B3FC12BE1B506589208CB381EDA3DB /* QiitaURLQueryParameter.swift in Sources */,
+				37A003F91D68A89E001FC5EC /* QiitaTagging.swift in Sources */,
+				37A003F71D68A5C7001FC5EC /* QiitaPutPath.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

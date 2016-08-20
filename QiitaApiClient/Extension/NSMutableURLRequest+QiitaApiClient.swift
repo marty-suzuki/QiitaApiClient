@@ -23,6 +23,17 @@ extension NSMutableURLRequest {
             } catch let e as NSError {
                 return nil
             }
+        case .Delete(let path):
+             values = (method: "DELETE", path: path.pathString, httpBody: nil, contentType: nil)
+        case .Patch(let path):
+            do {
+                let httpBody = try NSJSONSerialization.dataWithJSONObject(path.dictionary, options: .PrettyPrinted)
+                values = (method: "PATHC", path: path.pathString, httpBody: httpBody, contentType: "application/json")
+            } catch let e as NSError {
+                return nil
+            }
+        case .Put(let path):
+             values = (method: "PUT", path: path.pathString, httpBody: nil, contentType: nil)
         }
         
         guard let URL = NSURL(string: NSMutableURLRequest.baseURL + values.path) else {

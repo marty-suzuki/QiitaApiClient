@@ -9,6 +9,9 @@
 import Foundation
 
 public enum QiitaHttpMethod {
-    case Get(QiitaGetPath)
-    case Post(QiitaPostPath)
+    case Get   (QiitaGetPath)
+    case Post  (QiitaPostPath)
+    case Delete(QiitaDeletePath)
+    case Patch (QiitaPatchPath)
+    case Put   (QiitaPutPath)
 }

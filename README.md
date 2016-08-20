@@ -19,26 +19,30 @@ it, simply add the following line to your Podfile:
 ```ruby
 pod "QiitaApiClient"
 ```
-- [x] GET /api/v2/oauth/authorize
-- [ ] GET /api/v2/items/:item_id/likes
-- [x] POST /api/v2/access_tokens
-- [ ] DELETE /api/v2/access_tokens/:access_token
-- [ ] DELETE /api/v2/comments/:comment_id
-- [ ] GET /api/v2/comments/:comment_id
-- [ ] PATCH /api/v2/comments/:comment_id
-- [ ] DELETE /api/v2/comments/:comment_id/thank
-- [ ] PUT /api/v2/comments/:comment_id/thank
-- [ ] GET /api/v2/items/:item_id/comments
-- [ ] POST /api/v2/items/:item_id/comments
-- [ ] POST /api/v2/items/:item_id/taggings
-- [ ] DELETE /api/v2/items/:item_id/taggings/:tagging_id
-- [ ] GET /api/v2/tags
-- [ ] GET /api/v2/tags/:tag_id
-- [ ] GET /api/v2/users/:user_id/following_tags
-- [ ] DELETE /api/v2/tags/:tag_id/following
-- [ ] GET /api/v2/tags/:tag_id/following
-- [ ] PUT /api/v2/tags/:tag_id/following
-- [ ] GET /api/v2/teams
+| Original Path                               | Method | Associated Values                                                     | Response               |
+|:--------------------------------------------|:-------|:----------------------------------------------------------------------|:-----------------------|
+| /api/v2/oauth/authorize                     | Get    | QauthAuthorize(clientId: String, scope: String, state: String?)       | --                     |
+| /api/v2/items/:item_id/likes                | Get    | ItemsItemIdLikes(itemId: Int)                                         | [QiitaLike]            |
+| /api/v2/access_tokens                       | Post   | AccessTokens(clientId: String, clientSecret: String, code: String)    | QiitaAccessToken       |
+| /api/v2/access_tokens/:access_token         | Delete | AccessTokens(accessToken: String)                                     | --                     |
+| /api/v2/comments/:comment_id                | Delete | CommentsCommentId(commentId: String)                                  | --                     |
+| /api/v2/comments/:comment_id                | Get    | CommentsCommentId(commentId: String)                                  | QiitaComment           |
+| /api/v2/comments/:comment_id                | Patch  | CommentsCommentId(commentId: String, body: String)                    | QiitaComment           |
+| /api/v2/comments/:comment_id/thank          | Delete | CommentsCommentIdThank(commentId: String)                             | QiitaComment           |
+| /api/v2/comments/:comment_id/thank          | Put    | CommentsCommentIdThank(commentId: String)                             | QiitaComment           |
+| /api/v2/items/:item_id/comments             | Get    | ItemsItemIdComments(itemId: String)                                   | [QiitaComment]         |
+| /api/v2/items/:item_id/comments             | Post   | ItemsItemIdComments(itemId: String, body: String)                     | QiitaComment           |
+| /api/v2/items/:item_id/taggings             | Post   | ItemsItemIdTaggings(itemId: String, name: String, versions: [String]) | QiitaTagging           |
+| /api/v2/items/:item_id/taggings/:tagging_id | Delete | ItemsItemIdTaggingsTaggingId(itemId: String, taggingId: Int)          | --                     |
+| /api/v2/tags                                | Get    | Tags(page: Int, perPage: Int, sort: Sort)                             | [QiitaTag]             |
+| /api/v2/tags/:tag_id                        | Get    | TagsTagId(tagId: Int)                                                 | QiitaTag               |
+| /api/v2/users/:user_id/following_tags       | Get    | UsersUserIdFollowingTags(userId: String, page: Int, perPage: Int)     | QiitaTag               |
+| /api/v2/tags/:tag_id/following              | Delete | TagsTagIdFollowing(tagId: Int)                                        | --                     |
+| /api/v2/tags/:tag_id/following              | Get    | TagsTagIdFollowing(tagId: Int)                                        | QiitaTag               |
+| /api/v2/tags/:tag_id/following              | Put    | TagsTagIdFollowing(tagId: Int)                                        | --                     |
+| /api/v2/teams                               | Get    | Teams                                                                 | --                     |
+|||||
+
 - [ ] GET /api/v2/templates
 - [ ] DELETE /api/v2/templates/:template_id
 - [ ] GET /api/v2/templates/:template_id
@@ -73,7 +77,8 @@ pod "QiitaApiClient"
 - [ ] GET /api/v2/tags/:tag_id/items
 - [ ] GET /api/v2/users/:user_id/items
 - [ ] GET /api/v2/users/:user_id/stocks
-- [x] GET /api/v2/authenticated_user 
+
+| /api/v2/authenticated_user                  | Get    | AuthenticatedUser                                                     | QiitaAuthenticatedUser |
 
 ## Author
 
