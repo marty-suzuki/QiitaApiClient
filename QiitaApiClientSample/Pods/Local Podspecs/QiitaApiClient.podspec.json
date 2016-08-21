@@ -1,21 +1,20 @@
 {
   "name": "QiitaApiClient",
   "version": "0.1.0",
-  "summary": "A short description of QiitaApiClient.",
-  "description": "TODO: Add long description of the pod here.",
+  "summary": "API client for http://qiita.com/.",
   "homepage": "https://github.com/szk-atmosphere/QiitaApiClient",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
   },
   "authors": {
-    "szk-atmosphere": "s1180183@gmail.com"
+    "marty-suzuki": "s1180183@gmail.com"
   },
   "source": {
-    "git": "https://github.com/szk-atmosphere/QiitaApiClient.git",
+    "git": "https://github.com/marty-suzuki/QiitaApiClient.git",
     "tag": "0.1.0"
   },
-  "social_media_url": "https://twitter.com/SzkAtmosphere",
+  "social_media_url": "https://twitter.com/marty_suzuki",
   "platforms": {
     "ios": "8.0"
   },

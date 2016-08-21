@@ -11,7 +11,6 @@ import WebKit
 import MisterFusion
 
 public final class QiitaAuthorizeViewController: UIViewController {
-
     private let webView: WKWebView = WKWebView(frame: .zero, configuration: WKWebViewConfiguration())
     private let navigationView: UIView = UIView(frame: .zero)
     

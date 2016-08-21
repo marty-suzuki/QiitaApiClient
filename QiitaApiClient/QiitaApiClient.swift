@@ -15,6 +15,8 @@ public class QiitaApiClient {
     
     private init() {}
     
+    private var authorizeViewControllerAnimating = false
+    
     private func checkCode(success: (() -> ())?, failure: (NSError -> ())?) {
         if let _ = QiitaApplicationInfo.sharedInfo.code {
             success?()
@@ -25,17 +27,40 @@ public class QiitaApiClient {
         }
     }
     
-    private func showAuthorizeViewController(completion: (() -> ())) {
+    private func topPresentingViewController() -> UIViewController? {
         var viewController = UIApplication.sharedApplication().keyWindow?.rootViewController
         while let presentingViewController = viewController?.presentingViewController {
             viewController = presentingViewController
         }
-        let authorizeVC = QiitaAuthorizeViewController()
-        authorizeVC.didFinishClose = completion
-        viewController?.presentViewController(authorizeVC, animated: true, completion: nil)
+        return viewController
     }
     
-    private func httpRequest(request: NSMutableURLRequest, success: (NSData -> ()), failure: (NSError -> ())?) {
+    private func showAuthorizeViewController(completion: (() -> ())) {
+        if authorizeViewControllerAnimating {
+            completion()
+            return
+        }
+        authorizeViewControllerAnimating = true
+        
+        let viewController = topPresentingViewController()
+        if let vc = viewController as? QiitaAuthorizeViewController {
+            completion()
+            return
+        }
+                
+        if let vc = viewController {
+            let authorizeVC = QiitaAuthorizeViewController()
+            authorizeVC.didFinishClose = completion
+            vc.presentViewController(authorizeVC, animated: true) {
+                self.authorizeViewControllerAnimating = false
+            }
+            return
+        }
+        self.authorizeViewControllerAnimating = false
+        completion()
+    }
+    
+    private func httpRequest(request: NSMutableURLRequest, success: ((NSHTTPURLResponse, NSData) -> ()), failure: (NSError -> ())?) {
         let task = session.dataTaskWithRequest(request) { [weak self] in
             if let error = $0.2 {
                 failure?(error)
@@ -76,7 +101,7 @@ public class QiitaApiClient {
                     failure?(e)
                 }
             case .OK, .Created, .NoContent:
-                success(data)
+                success(response, data)
             case .Unknown:
                 failure?(NSError(errorDomain: .UnknownStatusCode))
             }
@@ -84,19 +109,28 @@ public class QiitaApiClient {
         task.resume()
     }
     
-    public func request<T: QiitaModel>(method: QiitaHttpMethod, success: (T -> ())?, failure: (NSError -> ())?) {
+    public func request(method: QiitaHttpMethod, success: (() -> ())?, failure: (NSError -> ())?) {
+        checkCode({ [weak self] in
+            guard let urlRequest = NSMutableURLRequest(method: method) else { return }
+            self?.httpRequest(urlRequest, success: { data in
+                success?()
+            }, failure: failure)
+        }, failure: failure)
+    }
+    
+    public func request<T: QiitaModel>(method: QiitaHttpMethod, success: ((NSHTTPURLResponse, T) -> ())?, failure: (NSError -> ())?) {
         checkCode({ [weak self] in
             guard let urlRequest = NSMutableURLRequest(method: method) else { return }
             self?.httpRequest(urlRequest, success: {
                 do {
                     guard
-                        let dictionary = try NSJSONSerialization.JSONObjectWithData($0, options: .AllowFragments) as? [String : NSObject],
+                        let dictionary = try NSJSONSerialization.JSONObjectWithData($0.1, options: .AllowFragments) as? [String : NSObject],
                         let model = T(dictionary: dictionary)
                     else {
                         failure?(NSError(errorDomain: .InvalidResponseData))
                         return
                     }
-                    success?(model)
+                    success?($0.0, model)
                 } catch let e as NSError {
                     failure?(e)
                 }
@@ -104,19 +138,19 @@ public class QiitaApiClient {
         }, failure: failure)
     }
     
-    public func request<T: QiitaModel>(method: QiitaHttpMethod, success: ([T] -> ())?, failure: (NSError -> ())?) {
+    public func request<T: QiitaModel>(method: QiitaHttpMethod, success: ((NSHTTPURLResponse, [T]) -> ())?, failure: (NSError -> ())?) {
         checkCode({ [weak self] in
             guard let urlRequest = NSMutableURLRequest(method: method) else { return }
             self?.httpRequest(urlRequest, success: {
                 do {
                     guard
-                        let array = try NSJSONSerialization.JSONObjectWithData($0, options: .AllowFragments) as? [[String : NSObject]]
+                        let array = try NSJSONSerialization.JSONObjectWithData($0.1, options: .AllowFragments) as? [[String : NSObject]]
                     else {
                         failure?(NSError(errorDomain: .InvalidResponseData))
                         return
                     }
                     let models: [T] = array.flatMap({ T(dictionary: $0) })
-                    success?(models)
+                    success?($0.0, models)
                 } catch let e as NSError {
                     failure?(e)
                 }
@@ -130,8 +164,8 @@ public class QiitaApiClient {
             failure?(NSError(errorDomain: .NotFindCode))
             return
         }
-        let setAccessToken: QiitaAccessToken -> () = {
-            QiitaApplicationInfo.sharedInfo.accessToken = $0.token
+        let setAccessToken: (NSHTTPURLResponse, QiitaAccessToken) -> () = {
+            QiitaApplicationInfo.sharedInfo.accessToken = $0.1.token
             success?()
         }
         request(.Post(.AccessTokens(clientId: info.clientId, clientSecret: info.clientSecret, code: code)), success: setAccessToken, failure: failure)

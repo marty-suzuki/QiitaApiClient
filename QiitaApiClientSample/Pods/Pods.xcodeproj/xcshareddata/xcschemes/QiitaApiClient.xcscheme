@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '16EBEDE310B664E74E60ABAF'
+               BlueprintIdentifier = 'D18C18B94C7F906D3A461E4F'
                BlueprintName = 'QiitaApiClient'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'QiitaApiClient.framework'>

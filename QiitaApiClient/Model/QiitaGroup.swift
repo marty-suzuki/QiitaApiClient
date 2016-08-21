@@ -1,5 +1,5 @@
 //
-//  QiitaTeamGroup.swift
+//  QiitaGroup.swift
 //  QiitaApiClient
 //
 //  Created by Taiki Suzuki on 2016/08/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class QiitaTeamGroup: QiitaModel {
+public class QiitaGroup: QiitaModel {
     public let createdAt: NSDate
     public let id: Int
     public let name: String

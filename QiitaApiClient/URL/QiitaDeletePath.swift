@@ -14,6 +14,12 @@ public enum QiitaDeletePath: QiitaPathStringReturnable {
     case CommentsCommentIdThank(commentId: String)
     case ItemsItemIdTaggingsTaggingId(itemId: String, taggingId: Int)
     case TagsTagIdFollowing(tagId: Int)
+    case TemplatesTemplateId(templateId: Int)
+    case ProjectsProjectId(progectId: Int)
+    case UsersUserIdFollowing(userId: String)
+    case ItemsItemId(itemId: String)
+    case ItemsItemIdLike(itemId: String)
+    case ItemsItemIdStock(itemId: String)
     
     var pathString: String {
         switch self {
@@ -27,6 +33,18 @@ public enum QiitaDeletePath: QiitaPathStringReturnable {
             return "/items/\(itemId)/taggings/\(taggingId)"
         case .TagsTagIdFollowing(let tagId):
             return "/tags/\(tagId)/following"
+        case .TemplatesTemplateId(let templateId):
+            return "/templates/\(templateId)"
+        case .ProjectsProjectId(let progectId):
+            return "/projects/\(progectId)"
+        case .UsersUserIdFollowing(let userId):
+            return "/users/\(userId)/following"
+        case .ItemsItemId(let itemId):
+            return "/items/" + itemId
+        case .ItemsItemIdLike(let itemId):
+            return "/items/\(itemId)/like"
+        case .ItemsItemIdStock(let itemId):
+            return "/items/\(itemId)/stock"
         }
     }
 }

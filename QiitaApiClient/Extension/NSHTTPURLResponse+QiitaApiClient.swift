@@ -24,4 +24,8 @@ extension NSHTTPURLResponse {
     var statusCodeType: StatusCodeType {
         return StatusCodeType(rawValue: statusCode) ?? .Unknown
     }
+    
+    public var totalCount: Int? {
+        return Int(allHeaderFields["Total-Count"] as? String ?? "")
+    }
 }
