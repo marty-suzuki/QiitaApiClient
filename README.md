@@ -25,6 +25,7 @@ QiitaApiClient.sharedClient.request(method, success: { (response, models: [Qiita
 }, failure: { print($0) })
 
 //Fetch authenticated user sample
+let method: QiitaHttpMethod = .Get(.AuthenticatedUserItems(page: 1, perPage: 100))
 QiitaApiClient.sharedClient.request(method, success: { (response, model: QiitaAuthenticatedUser) in
     print(model.name)
 }, failure: { print($0) })
