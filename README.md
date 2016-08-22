@@ -19,16 +19,26 @@ API client for [Qiita](http://qiita.com/).
 ```swift
 //Search items sample
 let method: QiitaHttpMethod = .Get(.Items(page: 1, perPage: 100, query: [.Word("MisterFusion")]))
-QiitaApiClient.sharedClient.request(method, success: { (response, models: [QiitaItem]) in
-    print(response.totalCount)
-    models.forEach { print($0.title) }
-}, failure: { print($0) })
+QiitaApiClient.sharedClient.request(method) { (response: QiitaResponse<[QiitaItem]>) in
+    switch response.result {
+    case .Success(let models):
+        print(response.totalCount)
+        models.forEach { print($0.title) }
+    case .Failure(let error):
+        print(error)
+    }
+}
 
 //Fetch authenticated user sample
 let method: QiitaHttpMethod = .Get(.AuthenticatedUserItems(page: 1, perPage: 100))
-QiitaApiClient.sharedClient.request(method, success: { (response, model: QiitaAuthenticatedUser) in
-    print(model.name)
-}, failure: { print($0) })
+QiitaApiClient.sharedClient.request(method) { (response: QiitaResponse<QiitaAuthenticatedUser>) in
+    switch response.result {
+    case .Success(let model):
+        print(model.name)
+    case .Failure(let error):
+        print(error)
+    }
+}
 ```
 
 ## Configration

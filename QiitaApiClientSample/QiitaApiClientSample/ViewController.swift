@@ -41,26 +41,36 @@ class ViewController: UIViewController {
     
     private func fetchAuthenticatedUser() {
         let method: QiitaHttpMethod = .Get(.AuthenticatedUser)
-        QiitaApiClient.sharedClient.request(method, success: { (response, model: QiitaAuthenticatedUser) in
-            dispatch_async(dispatch_get_main_queue()) {
-                self.nameLabel.text = model.name
-                self.userNameLabel.text = "@" + model.id
-                self.indicator.startAnimating()
-                self.loadAuthorizedUserButton.setTitle("Load", forState: .Normal)
+        QiitaApiClient.sharedClient.request(method) { (response: QiitaResponse<QiitaAuthenticatedUser>) in
+            switch response.result {
+            case .Success(let model):
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.nameLabel.text = model.name
+                    self.userNameLabel.text = "@" + model.id
+                    self.indicator.startAnimating()
+                    self.loadAuthorizedUserButton.setTitle("Load", forState: .Normal)
+                }
+                self.fetchUserIcon(model.profileImageUrl)
+                self.fetchAuthenticatedUserItems()
+            case .Failure(let error):
+                print(error)
             }
-            self.fetchUserIcon(model.profileImageUrl)
-            self.fetchAuthenticatedUserItems()
-        }, failure: { print($0) })
+        }
     }
     
     private func fetchAuthenticatedUserItems() {
         let method: QiitaHttpMethod = .Get(.AuthenticatedUserItems(page: 1, perPage: 100))
-        QiitaApiClient.sharedClient.request(method, success: { (response, models: [QiitaItem]) in
-            self.items = models
-            dispatch_async(dispatch_get_main_queue()) {
-                self.tableView.reloadData()
+        QiitaApiClient.sharedClient.request(method) { (response: QiitaResponse<[QiitaItem]>) in
+            switch response.result {
+            case .Success(let models):
+                self.items = models
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.tableView.reloadData()
+                }
+            case .Failure(let error):
+                print(error)
             }
-        }, failure: { print($0) })
+        }
     }
     
     private func fetchUserIcon(url: NSURL) {

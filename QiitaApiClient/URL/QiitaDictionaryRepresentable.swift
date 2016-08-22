@@ -1,8 +1,8 @@
 //
 //  QiitaDictionaryRepresentable.swift
-//  Pods
+//  QiitaApiClient
 //
-//  Created by 鈴木大貴 on 2016/08/22.
+//  Created by Taiki Suzuki on 2016/08/22.
 //
 //
 
