@@ -57,6 +57,15 @@ public enum QiitaGetPath: QiitaPathStringReturnable {
     case UsersUserIdItems(userId: String, page: Int, perPage: Int)
     case UsersUserIdStocks(userId: String, page: Int, perPage: Int)
     
+    var needAuthenticate: Bool {
+        switch  self {
+        case .AuthenticatedUser, .AuthenticatedUserItems:
+            return true
+        default:
+            return false
+        }
+    }
+    
     var pathString: String {
         switch self {
         case .QauthAuthorize:

@@ -17,7 +17,11 @@ public class QiitaApiClient {
     
     private var authorizeViewControllerAnimating = false
     
-    private func checkCode(success: (() -> ())?, failure: (NSError -> ())?) {
+    private func checkCode(needAuthenticate: Bool, success: (() -> ())?, failure: (NSError -> ())?) {
+        if !needAuthenticate {
+            success?()
+            return
+        }
         if let _ = QiitaApplicationInfo.sharedInfo.code {
             success?()
             return
@@ -110,7 +114,7 @@ public class QiitaApiClient {
     }
     
     public func request(method: QiitaHttpMethod, success: (() -> ())?, failure: (NSError -> ())?) {
-        checkCode({ [weak self] in
+        checkCode(method.needAuthenticate, success: { [weak self] in
             guard let urlRequest = NSMutableURLRequest(method: method) else { return }
             self?.httpRequest(urlRequest, success: { data in
                 success?()
@@ -119,7 +123,7 @@ public class QiitaApiClient {
     }
     
     public func request<T: QiitaModel>(method: QiitaHttpMethod, success: ((NSHTTPURLResponse, T) -> ())?, failure: (NSError -> ())?) {
-        checkCode({ [weak self] in
+        checkCode(method.needAuthenticate, success: { [weak self] in
             guard let urlRequest = NSMutableURLRequest(method: method) else { return }
             self?.httpRequest(urlRequest, success: {
                 do {
@@ -139,7 +143,7 @@ public class QiitaApiClient {
     }
     
     public func request<T: QiitaModel>(method: QiitaHttpMethod, success: ((NSHTTPURLResponse, [T]) -> ())?, failure: (NSError -> ())?) {
-        checkCode({ [weak self] in
+        checkCode(method.needAuthenticate, success: { [weak self] in
             guard let urlRequest = NSMutableURLRequest(method: method) else { return }
             self?.httpRequest(urlRequest, success: {
                 do {

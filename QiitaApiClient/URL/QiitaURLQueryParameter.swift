@@ -8,14 +8,6 @@
 
 import Foundation
 
-extension String {
-    var RFC3986Encode: String {
-        let allowedCharacterSet: NSMutableCharacterSet = .alphanumericCharacterSet()
-        allowedCharacterSet.addCharactersInString("-._~")
-        return stringByAddingPercentEncodingWithAllowedCharacters(allowedCharacterSet) ?? ""
-    }
-}
-
 struct QiitaURLQueryParameter {
     let name: String
     let value: String

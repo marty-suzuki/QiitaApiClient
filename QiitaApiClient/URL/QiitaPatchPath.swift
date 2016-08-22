@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum QiitaPatchPath: QiitaPathStringReturnable {
+public enum QiitaPatchPath: QiitaPathStringReturnable, QiitaDictionaryRepresentable {
     case CommentsCommentId(commentId: String, body: String)
     case TemplatesTemplateId(templateId: Int, body: String, name: String, tags: [QiitaTagging], title: String)
     case ProjectsProjectId(progectId: Int, archived: Bool, body: String, name: String, tags: [QiitaTagging])

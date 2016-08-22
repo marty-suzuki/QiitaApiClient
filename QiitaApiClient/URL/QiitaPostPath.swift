@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum QiitaPostPath: QiitaPathStringReturnable {
+public enum QiitaPostPath: QiitaPathStringReturnable, QiitaDictionaryRepresentable {
     case AccessTokens(clientId: String, clientSecret: String, code: String)
     case ItemsItemIdComments(itemId: String, body: String)
     case ItemsItemIdTaggings(itemId: String, name: String, versions: [String])
