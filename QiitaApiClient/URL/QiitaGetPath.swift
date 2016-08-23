@@ -46,7 +46,7 @@ public enum QiitaGetPath: QiitaPathStringReturnable {
     case Users(page: Int, perPage: Int)
     case UsersUserId(userId: String)
     case UsersUserIdFollowees(userId: String, page: Int, perPage: Int)
-    case UsersUserIdFollowers(uesrId: String, page: Int, perPage: Int)
+    case UsersUserIdFollowers(userId: String, page: Int, perPage: Int)
     case UsersUserIdFollowing(userId: String)
     case AuthenticatedUserItems(page: Int, perPage: Int)
     case Items(page: Int, perPage: Int, query: [SearchQuery])
@@ -82,8 +82,8 @@ public enum QiitaGetPath: QiitaPathStringReturnable {
             return "/tags"
         case .TagsTagId(let tagId):
             return "/tags/\(tagId)"
-        case .UsersUserIdFollowingTags(let userId, _, _):
-            return"/users/\(userId)/following_tags"
+        case .UsersUserIdFollowingTags(let value):
+            return"/users/\(value.userId)/following_tags"
         case .TagsTagIdFollowing(let tagId):
             return "/tags/\(tagId)/following"
         case .Teams:
@@ -96,16 +96,16 @@ public enum QiitaGetPath: QiitaPathStringReturnable {
             return "/projects"
         case .ProjectsProjectId(let progectId):
             return "/projects/\(progectId)"
-        case .ItemsItemIdStockers(let itemId, _, _):
-            return "/items/\(itemId)/stockers"
+        case .ItemsItemIdStockers(let value):
+            return "/items/\(value.itemId)/stockers"
         case .Users:
             return "/users"
         case .UsersUserId(let userId):
             return "/users/" + userId
         case .UsersUserIdFollowees(let userId):
             return "/users/\(userId)/followees"
-        case .UsersUserIdFollowers(let userId, _, _):
-            return "/users/\(userId)/followers"
+        case .UsersUserIdFollowers(let value):
+            return "/users/\(value.userId)/followers"
         case .UsersUserIdFollowing(let userId):
             return "/users/\(userId)/following"
         case .AuthenticatedUserItems:
@@ -118,53 +118,53 @@ public enum QiitaGetPath: QiitaPathStringReturnable {
             return "/items/\(itemId)/stock"
         case .ItemsItemIdLike(let itemId):
             return "/items/\(itemId)/like"
-        case .TagsTagIdItems(let tagId, _, _):
-            return "/tags/\(tagId)/items"
-        case .UsersUserIdItems(let userId, _, _):
-            return "/users/\(userId)/items"
-        case .UsersUserIdStocks(let userId, _, _):
-            return "/users/\(userId)/stocks"
+        case .TagsTagIdItems(let value):
+            return "/tags/\(value.tagId)/items"
+        case .UsersUserIdItems(let value):
+            return "/users/\(value.userId)/items"
+        case .UsersUserIdStocks(let value):
+            return "/users/\(value.userId)/stocks"
         }
     }
     
     var queryString: String {
         switch self {
-        case .QauthAuthorize(let clientId, let scope, let state):
+        case .QauthAuthorize(let value):
             return convertParametersToString(
-                QiitaURLQueryParameter(name: "client_id", value: clientId),
-                QiitaURLQueryParameter(name: "scope", value: scope, needsEncode: false),
-                QiitaURLQueryParameter(name: "state", value: state)
+                QiitaURLQueryParameter(name: "client_id", value: value.clientId),
+                QiitaURLQueryParameter(name: "scope", value: value.scope, needsEncode: false),
+                QiitaURLQueryParameter(name: "state", value: value.state)
             )
-        case .Tags(let page, let perPage, let sort):
-            let sortParameter = QiitaURLQueryParameter(name: "sort", value: sort.rawValue)
-            return pageParameters(page, perPage: perPage, otherParameters: [sortParameter])
-        case .UsersUserIdFollowingTags(_, let page, let perPage):
-            return pageParameters(page, perPage: perPage)
-        case .Templates(let page, let perPage):
-            return pageParameters(page, perPage: perPage)
-        case .Projects(let page, let perPage):
-            return pageParameters(page, perPage: perPage)
-        case .ItemsItemIdStockers(_, let page, let perPage):
-            return pageParameters(page, perPage: perPage)
-        case .Users(let page, let perPage):
-            return pageParameters(page, perPage: perPage)
-        case .UsersUserIdFollowees(_, let page, let perPage):
-            return pageParameters(page, perPage: perPage)
-        case .UsersUserIdFollowers(_, let page, let perPage):
-            return pageParameters(page, perPage: perPage)
-        case .AuthenticatedUserItems(let page, let perPage):
-            return pageParameters(page, perPage: perPage)
-        case .Items(let page, let perPage, let query):
-            let searchQueries: [String] = query.flatMap { $0.toString() }
+        case .Tags(let value):
+            let sortParameter = QiitaURLQueryParameter(name: "sort", value: value.sort.rawValue)
+            return pageParameters(value.page, perPage: value.perPage, otherParameters: [sortParameter])
+        case .UsersUserIdFollowingTags(let value):
+            return pageParameters(value.page, perPage: value.perPage)
+        case .Templates(let value):
+            return pageParameters(value.page, perPage: value.perPage)
+        case .Projects(let value):
+            return pageParameters(value.page, perPage: value.perPage)
+        case .ItemsItemIdStockers(let value):
+            return pageParameters(value.page, perPage: value.perPage)
+        case .Users(let value):
+            return pageParameters(value.page, perPage: value.perPage)
+        case .UsersUserIdFollowees(let value):
+            return pageParameters(value.page, perPage: value.perPage)
+        case .UsersUserIdFollowers(let value):
+            return pageParameters(value.page, perPage: value.perPage)
+        case .AuthenticatedUserItems(let value):
+            return pageParameters(value.page, perPage: value.perPage)
+        case .Items(let value):
+            let searchQueries: [String] = value.query.flatMap { $0.toString() }
             let searchQueryString = searchQueries.reduce("") { $0 == "" ? $1 : $0 + "+" + $1 }
             let searchQueryParameter = QiitaURLQueryParameter(name: "query", value: searchQueryString, needsEncode: false)
-            return pageParameters(page, perPage: perPage, otherParameters: [searchQueryParameter])
-        case .TagsTagIdItems(_, let page, let perPage):
-            return pageParameters(page, perPage: perPage)
-        case .UsersUserIdItems(_, let page, let perPage):
-            return pageParameters(page, perPage: perPage)
-        case .UsersUserIdStocks(_, let page, let perPage):
-            return pageParameters(page, perPage: perPage)
+            return pageParameters(value.page, perPage: value.perPage, otherParameters: [searchQueryParameter])
+        case .TagsTagIdItems(let value):
+            return pageParameters(value.page, perPage: value.perPage)
+        case .UsersUserIdItems(let value):
+            return pageParameters(value.page, perPage: value.perPage)
+        case .UsersUserIdStocks(let value):
+            return pageParameters(value.page, perPage: value.perPage)
         case .AuthenticatedUser,
              .ItemsItemIdLikes,
              .CommentsCommentId,

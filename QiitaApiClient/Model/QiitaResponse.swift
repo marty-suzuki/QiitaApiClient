@@ -21,22 +21,7 @@ public class QiitaResponse<T> {
         return httpURLResponse?.totalCount
     }
     
-    init(result: QiitaResult<T>, httpURLResponse: NSHTTPURLResponse?) {
-        self.result = result
-        self.httpURLResponse = httpURLResponse
-    }
-}
-
-public enum QiitaNoDataResult {
-    case Success
-    case Failure(NSError)
-}
-
-public class QiitaNoDataResponse {
-    public let result : QiitaNoDataResult
-    public let httpURLResponse: NSHTTPURLResponse?
-    
-    init(result: QiitaNoDataResult, httpURLResponse: NSHTTPURLResponse?) {
+    public required init(result: QiitaResult<T>, httpURLResponse: NSHTTPURLResponse?) {
         self.result = result
         self.httpURLResponse = httpURLResponse
     }

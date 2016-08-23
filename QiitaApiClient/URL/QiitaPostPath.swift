@@ -23,8 +23,8 @@ public enum QiitaPostPath: QiitaPathStringReturnable, QiitaDictionaryRepresentab
             return "/access_tokens"
         case .ItemsItemIdComments(let itemId):
             return "/items/\(itemId)/comments"
-        case .ItemsItemIdTaggings(let itemId, _, _):
-            return "/items/\(itemId)/taggings"
+        case .ItemsItemIdTaggings(let value):
+            return "/items/\(value.itemId)/taggings"
         case .Templates:
             return "/templates"
         case .Projects:
@@ -38,54 +38,54 @@ public enum QiitaPostPath: QiitaPathStringReturnable, QiitaDictionaryRepresentab
     
     var dictionary: [String : NSObject] {
         switch self {
-        case .AccessTokens(let clientId, let clientSecret, let code):
+        case .AccessTokens(let value):
             return [
-                "client_id": clientId,
-                "client_secret": clientSecret,
-                "code": code
+                "client_id": value.clientId,
+                "client_secret": value.clientSecret,
+                "code": value.code
             ]
-        case .ItemsItemIdTaggings(_, let name, let versions):
+        case .ItemsItemIdTaggings(let value):
             return [
-                "name" : name,
-                "versions" : versions
+                "name" : value.name,
+                "versions" : value.versions
             ]
-        case .ItemsItemIdComments(_, let body):
+        case .ItemsItemIdComments(let value):
             return [
-                "body" : body
+                "body" : value.body
             ]
-        case .Templates(let body, let name, let tags, let title):
-            let tags: [[String : NSObject]] = tags.flatMap { $0.dictionaryRepresentation() }
+        case .Templates(let value):
+            let tags: [[String : NSObject]] = value.tags.flatMap { $0.dictionaryRepresentation() }
             return [
-                "body" : body,
-                "name" : name,
+                "body" : value.body,
+                "name" : value.name,
                 "tags" : tags,
-                "title" : title
+                "title" : value.title
             ]
-        case .Projects(let archived, let body, let name, let tags):
-            let tags: [[String : NSObject]] = tags.flatMap { $0.dictionaryRepresentation() }
+        case .Projects(let value):
+            let tags: [[String : NSObject]] = value.tags.flatMap { $0.dictionaryRepresentation() }
             return [
-                "archived" : archived,
-                "body" : body,
-                "name" : name,
+                "archived" : value.archived,
+                "body" : value.body,
+                "name" : value.name,
                 "tags" : tags
             ]
-        case .ExpandedTemplates(let body, let tags, let title):
-            let tags: [[String : NSObject]] = tags.flatMap { $0.dictionaryRepresentation() }
+        case .ExpandedTemplates(let value):
+            let tags: [[String : NSObject]] = value.tags.flatMap { $0.dictionaryRepresentation() }
             return [
-                "body" : body,
+                "body" : value.body,
                 "tags" : tags,
-                "title" : title
+                "title" : value.title
             ]
-        case .Items(let body, let coediting, let gist, let `private`, let tags, let title, let tweet):
-            let tags: [[String : NSObject]] = tags.flatMap { $0.dictionaryRepresentation() }
+        case .Items(let value):
+            let tags: [[String : NSObject]] = value.tags.flatMap { $0.dictionaryRepresentation() }
             return [
-                "body" : body,
-                "coediting" : coediting,
-                "gist" : gist,
-                "private" : `private`,
+                "body" : value.body,
+                "coediting" : value.coediting,
+                "gist" : value.gist,
+                "private" : value.`private`,
                 "tags" : tags,
-                "title" : title,
-                "tweet" : tweet
+                "title" : value.title,
+                "tweet" : value.tweet
             ]
         }
     }

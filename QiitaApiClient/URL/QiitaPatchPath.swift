@@ -16,47 +16,47 @@ public enum QiitaPatchPath: QiitaPathStringReturnable, QiitaDictionaryRepresenta
     
     var pathString: String {
         switch self {
-        case .CommentsCommentId(let commentId, _):
-            return "/comments/\(commentId)"
-        case .TemplatesTemplateId(let templateId, _, _, _, _):
-            return "/templates/\(templateId)"
-        case .ProjectsProjectId(let progectId, _, _, _, _):
-            return "/projects/\(progectId)"
-        case .ItemsItemId(let itemId, _, _, _, _, _):
-            return "/items/" + itemId
+        case .CommentsCommentId(let value):
+            return "/comments/\(value.commentId)"
+        case .TemplatesTemplateId(let value):
+            return "/templates/\(value.templateId)"
+        case .ProjectsProjectId(let value):
+            return "/projects/\(value.progectId)"
+        case .ItemsItemId(let value):
+            return "/items/" + value.itemId
         }
     }
     
     var dictionary: [String : NSObject] {
         switch self {
-        case .CommentsCommentId(_, let body):
+        case .CommentsCommentId(let value):
             return [
-                "body": body
+                "body": value.body
             ]
-        case .TemplatesTemplateId(_, let body, let name, let tags, let title):
-            let tags: [[String : NSObject]] = tags.flatMap { $0.dictionaryRepresentation() }
+        case .TemplatesTemplateId(let value):
+            let tags: [[String : NSObject]] = value.tags.flatMap { $0.dictionaryRepresentation() }
             return [
-                "body" : body,
-                "name" : name,
+                "body" : value.body,
+                "name" : value.name,
                 "tags" : tags,
-                "title" : title
+                "title" : value.title
             ]
-        case .ProjectsProjectId(_, let archived, let body, let name, let tags):
-            let tags: [[String : NSObject]] = tags.flatMap { $0.dictionaryRepresentation() }
+        case .ProjectsProjectId(let value):
+            let tags: [[String : NSObject]] = value.tags.flatMap { $0.dictionaryRepresentation() }
             return [
-                "archived" : archived,
-                "body" : body,
-                "name" : name,
+                "archived" : value.archived,
+                "body" : value.body,
+                "name" : value.name,
                 "tags" : tags
             ]
-        case .ItemsItemId(_, let body, let coediting, let `private`, let tags, let title):
-            let tags: [[String : NSObject]] = tags.flatMap { $0.dictionaryRepresentation() }
+        case .ItemsItemId(let value):
+            let tags: [[String : NSObject]] = value.tags.flatMap { $0.dictionaryRepresentation() }
             return [
-                "body" : body,
-                "coediting" : coediting,
-                "private" : `private`,
+                "body" : value.body,
+                "coediting" : value.coediting,
+                "private" : value.`private`,
                 "tags" : tags,
-                "title" : title
+                "title" : value.title
             ]
         }
     }

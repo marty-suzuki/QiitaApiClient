@@ -116,22 +116,6 @@ public class QiitaApiClient {
         task.resume()
     }
     
-    //MARK: - Request for no data response
-    public func request(method: QiitaHttpMethod, success: (NSHTTPURLResponse -> ())?, failure: ((NSHTTPURLResponse?, NSError) -> ())?) {
-        checkCode(method.needAuthenticate, success: { [weak self] in
-            guard let urlRequest = NSMutableURLRequest(method: method) else { return }
-            self?.httpRequest(urlRequest, success: { success?($0.0) }, failure: failure)
-        }, failure: failure)
-    }
-    
-    public func request(method: QiitaHttpMethod, completion: ((QiitaNoDataResponse) -> ())?) {
-        request(method, success: {
-            completion?(QiitaNoDataResponse(result: QiitaNoDataResult.Success, httpURLResponse: $0))
-        }) {
-            completion?(QiitaNoDataResponse(result: QiitaNoDataResult.Failure($0.1), httpURLResponse: $0.0))
-        }
-    }
-    
     //MARK: - Request for single response
     public func request<T: QiitaModel>(method: QiitaHttpMethod, success: ((NSHTTPURLResponse, T) -> ())?, failure: ((NSHTTPURLResponse?, NSError) -> ())?) {
         checkCode(method.needAuthenticate, success: { [weak self] in
@@ -142,7 +126,11 @@ public class QiitaApiClient {
                         let dictionary = try NSJSONSerialization.JSONObjectWithData($0.1, options: .AllowFragments) as? [String : NSObject],
                         let model = T(dictionary: dictionary)
                     else {
-                        failure?($0.0, NSError(errorDomain: .InvalidResponseData))
+                        guard let model = T(dictionary: [:]) else {
+                            failure?($0.0, NSError(errorDomain: .InvalidResponseData))
+                            return
+                        }
+                        success?($0.0, model)
                         return
                     }
                     success?($0.0, model)
