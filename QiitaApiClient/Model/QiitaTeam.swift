@@ -8,12 +8,12 @@
 
 import Foundation
 
-public class QiitaTeam: QiitaModel {
-    public let active: Bool
-    public let id: String
-    public let name: String
+open class QiitaTeam: QiitaModel {
+    open let active: Bool
+    open let id: String
+    open let name: String
     
-    public required init?(dictionary: [String : NSObject]) {
+    public required init?(dictionary: [AnyHashable : Any]) {
         guard
             let active = dictionary["active"] as? Bool,
             let id = dictionary["id"] as? String,

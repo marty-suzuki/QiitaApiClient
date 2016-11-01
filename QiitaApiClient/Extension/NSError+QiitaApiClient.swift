@@ -10,17 +10,17 @@
 import Foundation
 
 extension NSError {
-    private struct Const {
+    fileprivate struct Const {
         static let message = "message"
         static let type = "type"
         static let url = "url"
     }
     
     struct ErrorDomain {
-        static let InvalidResponseData = ErrorDomain(code: 100001, domain: "QiitaInvalidResponseDataErrorDomain")
-        static let InvalidErrorData    = ErrorDomain(code: 100002, domain: "QiitaInvalidErrorDataErrorDomain")
-        static let UnknownStatusCode   = ErrorDomain(code: 100003, domain: "QiitaUnknownStatusCodeErrorDomain")
-        static let NotFindCode         = ErrorDomain(code: 100004, domain: "QiitaNotFindCodeErrorDomain")
+        static let invalidResponseData = ErrorDomain(code: 100001, domain: "QiitaInvalidResponseDataErrorDomain")
+        static let invalidErrorData    = ErrorDomain(code: 100002, domain: "QiitaInvalidErrorDataErrorDomain")
+        static let unknownStatusCode   = ErrorDomain(code: 100003, domain: "QiitaUnknownStatusCodeErrorDomain")
+        static let notFindCode         = ErrorDomain(code: 100004, domain: "QiitaNotFindCodeErrorDomain")
         
         let code: Int
         let domain: String
@@ -30,7 +30,7 @@ extension NSError {
         self.init(domain: errorDomain.domain, code: errorDomain.code, userInfo: nil)
     }
     
-    convenience init?(response: NSHTTPURLResponse,  dictionary: [String : NSObject]) {
+    convenience init?(response: HTTPURLResponse,  dictionary: [AnyHashable : Any]) {
         guard
             let _ = dictionary[Const.message] as? String,
             let _ = dictionary[Const.type] as? String
@@ -38,8 +38,8 @@ extension NSError {
             return nil
         }
         var userInfo = dictionary
-        if let url = response.URL?.absoluteString {
-            userInfo[Const.url] = url
+        if let url = response.url?.absoluteString {
+            userInfo[Const.url] = url as NSObject?
         }
         self.init(domain: "QiitaServerErrorDomain", code: 100000 + response.statusCode, userInfo: userInfo)
     }

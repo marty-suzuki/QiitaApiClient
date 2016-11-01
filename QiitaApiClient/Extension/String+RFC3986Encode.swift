@@ -10,8 +10,8 @@ import Foundation
 
 extension String {
     var RFC3986Encode: String {
-        let allowedCharacterSet: NSMutableCharacterSet = .alphanumericCharacterSet()
-        allowedCharacterSet.addCharactersInString("-._~")
-        return stringByAddingPercentEncodingWithAllowedCharacters(allowedCharacterSet) ?? ""
+        let allowedCharacterSet: NSMutableCharacterSet = .alphanumeric()
+        allowedCharacterSet.addCharacters(in: "-._~")
+        return addingPercentEncoding(withAllowedCharacters: allowedCharacterSet as CharacterSet) ?? ""
     }
 }

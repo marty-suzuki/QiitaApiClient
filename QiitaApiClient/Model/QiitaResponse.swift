@@ -9,34 +9,34 @@
 import Foundation
 
 public enum QiitaResult<T> {
-    case Success(T)
-    case Failure(NSError)
+    case success(T)
+    case failure(Error)
 }
 
-public class QiitaResponse<T> {
-    public let result : QiitaResult<T>
-    public let httpURLResponse: NSHTTPURLResponse?
+open class QiitaResponse<T> {
+    open let result : QiitaResult<T>
+    open let httpURLResponse: HTTPURLResponse?
     
-    public var totalCount: Int? {
+    open var totalCount: Int? {
         return httpURLResponse?.totalCount
     }
     
-    init(result: QiitaResult<T>, httpURLResponse: NSHTTPURLResponse?) {
+    init(result: QiitaResult<T>, httpURLResponse: HTTPURLResponse?) {
         self.result = result
         self.httpURLResponse = httpURLResponse
     }
 }
 
 public enum QiitaNoDataResult {
-    case Success
-    case Failure(NSError)
+    case success
+    case failure(Error)
 }
 
-public class QiitaNoDataResponse {
-    public let result : QiitaNoDataResult
-    public let httpURLResponse: NSHTTPURLResponse?
+open class QiitaNoDataResponse {
+    open let result : QiitaNoDataResult
+    open let httpURLResponse: HTTPURLResponse?
     
-    init(result: QiitaNoDataResult, httpURLResponse: NSHTTPURLResponse?) {
+    init(result: QiitaNoDataResult, httpURLResponse: HTTPURLResponse?) {
         self.result = result
         self.httpURLResponse = httpURLResponse
     }

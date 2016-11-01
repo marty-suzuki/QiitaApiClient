@@ -8,15 +8,15 @@
 
 import Foundation
 
-public class QiitaLike: QiitaModel {
-    public let createdAt: NSDate
-    public let user: QiitaUser
+open class QiitaLike: QiitaModel {
+    open let createdAt: Date
+    open let user: QiitaUser
     
-    public required init?(dictionary: [String : NSObject]) {
+    public required init?(dictionary: [AnyHashable : Any]) {
         guard
             let rawCreatedAt = dictionary["created_at"] as? String,
-            let createdAt = NSDate.dateFromISO8601String(rawCreatedAt),
-            let rawUser = dictionary["user"] as? [String : NSObject],
+            let createdAt = Date.dateFromISO8601String(rawCreatedAt),
+            let rawUser = dictionary["user"] as? [AnyHashable : Any],
             let user = QiitaUser(dictionary: rawUser)
         else {
             return nil

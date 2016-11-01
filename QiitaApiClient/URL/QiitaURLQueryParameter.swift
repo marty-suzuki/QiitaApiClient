@@ -16,14 +16,14 @@ struct QiitaURLQueryParameter {
         return "\(name)=\(value)"
     }
     
-    private static func stringValue(value: Any) -> String {
+    fileprivate static func stringValue(_ value: Any) -> String {
         switch value {
         case let value as String: return value
         default: return "\(value)"
         }
     }
     
-    private static func encodedValue(value: Any, needsEncode: Bool) -> String? {
+    fileprivate static func encodedValue(_ value: Any, needsEncode: Bool) -> String? {
         let value = stringValue(value)
         if needsEncode {
             let encodedValue = value.RFC3986Encode
@@ -39,8 +39,8 @@ struct QiitaURLQueryParameter {
         guard
             let value = value,
             let encodedValue = QiitaURLQueryParameter.encodedValue(value, needsEncode: needsEncode)
-            else {
-                return nil
+        else {
+            return nil
         }
         self.value = encodedValue
         self.name = name

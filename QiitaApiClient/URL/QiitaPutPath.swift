@@ -9,23 +9,23 @@
 import Foundation
 
 public enum QiitaPutPath: QiitaPathStringReturnable {
-    case CommentsCommentIdThank(commentId: String)
-    case TagsTagIdFollowing(tagId: Int)
-    case UsersUserIdFollowing(userId: String)
-    case ItemsItemIdLike(itemId: String)
-    case ItemsItemIdStock(itemId: String)
+    case commentsCommentIdThank(commentId: String)
+    case tagsTagIdFollowing(tagId: Int)
+    case usersUserIdFollowing(userId: String)
+    case itemsItemIdLike(itemId: String)
+    case itemsItemIdStock(itemId: String)
     
     var pathString: String {
         switch self {
-        case .CommentsCommentIdThank(let commentId):
+        case .commentsCommentIdThank(let commentId):
             return "/comments/\(commentId)/thank"
-        case .TagsTagIdFollowing(let tagId):
+        case .tagsTagIdFollowing(let tagId):
             return "/tags/\(tagId)/following"
-        case .UsersUserIdFollowing(let userId):
+        case .usersUserIdFollowing(let userId):
             return "/users/\(userId)/following"
-        case .ItemsItemIdLike(let itemId):
+        case .itemsItemIdLike(let itemId):
             return "/items/\(itemId)/like"
-        case .ItemsItemIdStock(let itemId):
+        case .itemsItemIdStock(let itemId):
             return "/items/\(itemId)/stock"
         }
     }

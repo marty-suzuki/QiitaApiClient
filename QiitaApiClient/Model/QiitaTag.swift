@@ -8,13 +8,13 @@
 
 import Foundation
 
-public class QiitaTag: QiitaModel {
-    public let followersCount: Int
-    public let iconUrl: String?
-    public let id: Int
-    public let itemsCount: Int
+open class QiitaTag: QiitaModel {
+    open let followersCount: Int
+    open let iconUrl: String?
+    open let id: Int
+    open let itemsCount: Int
     
-    public required init?(dictionary: [String : NSObject]) {
+    public required init?(dictionary: [AnyHashable : Any]) {
         guard
             let followersCount = dictionary["followers_count"] as? Int,
             let id = dictionary["id"] as? Int,

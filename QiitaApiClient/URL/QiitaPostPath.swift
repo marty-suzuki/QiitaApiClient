@@ -9,75 +9,75 @@
 import Foundation
 
 public enum QiitaPostPath: QiitaPathStringReturnable, QiitaDictionaryRepresentable {
-    case AccessTokens(clientId: String, clientSecret: String, code: String)
-    case ItemsItemIdComments(itemId: String, body: String)
-    case ItemsItemIdTaggings(itemId: String, name: String, versions: [String])
-    case Templates(body: String, name: String, tags: [QiitaTagging], title: String)
-    case Projects(archived: Bool, body: String, name: String, tags: [QiitaTagging])
-    case ExpandedTemplates(body: String, tags: [QiitaTagging], title: String)
-    case Items(body: String, coediting: Bool, gist: Bool, `private`: Bool, tags: [QiitaTagging], title: String, tweet: Bool)
+    case accessTokens(clientId: String, clientSecret: String, code: String)
+    case itemsItemIdComments(itemId: String, body: String)
+    case itemsItemIdTaggings(itemId: String, name: String, versions: [String])
+    case templates(body: String, name: String, tags: [QiitaTagging], title: String)
+    case projects(archived: Bool, body: String, name: String, tags: [QiitaTagging])
+    case expandedTemplates(body: String, tags: [QiitaTagging], title: String)
+    case items(body: String, coediting: Bool, gist: Bool, `private`: Bool, tags: [QiitaTagging], title: String, tweet: Bool)
     
     var pathString: String {
         switch self {
-        case .AccessTokens:
+        case .accessTokens:
             return "/access_tokens"
-        case .ItemsItemIdComments(let itemId):
+        case .itemsItemIdComments(let itemId):
             return "/items/\(itemId)/comments"
-        case .ItemsItemIdTaggings(let itemId, _, _):
+        case .itemsItemIdTaggings(let itemId, _, _):
             return "/items/\(itemId)/taggings"
-        case .Templates:
+        case .templates:
             return "/templates"
-        case .Projects:
+        case .projects:
             return "/projects"
-        case .ExpandedTemplates:
+        case .expandedTemplates:
             return "/expanded_templates"
-        case .Items:
+        case .items:
             return "/items"
         }
     }
     
-    var dictionary: [String : NSObject] {
+    var dictionary: [AnyHashable : Any] {
         switch self {
-        case .AccessTokens(let clientId, let clientSecret, let code):
+        case .accessTokens(let clientId, let clientSecret, let code):
             return [
                 "client_id": clientId,
                 "client_secret": clientSecret,
                 "code": code
             ]
-        case .ItemsItemIdTaggings(_, let name, let versions):
+        case .itemsItemIdTaggings(_, let name, let versions):
             return [
                 "name" : name,
                 "versions" : versions
             ]
-        case .ItemsItemIdComments(_, let body):
+        case .itemsItemIdComments(_, let body):
             return [
                 "body" : body
             ]
-        case .Templates(let body, let name, let tags, let title):
-            let tags: [[String : NSObject]] = tags.flatMap { $0.dictionaryRepresentation() }
+        case .templates(let body, let name, let tags, let title):
+            let tags: [[AnyHashable : Any]] = tags.flatMap { $0.dictionaryRepresentation() }
             return [
                 "body" : body,
                 "name" : name,
                 "tags" : tags,
                 "title" : title
             ]
-        case .Projects(let archived, let body, let name, let tags):
-            let tags: [[String : NSObject]] = tags.flatMap { $0.dictionaryRepresentation() }
+        case .projects(let archived, let body, let name, let tags):
+            let tags: [[AnyHashable : Any]] = tags.flatMap { $0.dictionaryRepresentation() }
             return [
                 "archived" : archived,
                 "body" : body,
                 "name" : name,
                 "tags" : tags
             ]
-        case .ExpandedTemplates(let body, let tags, let title):
-            let tags: [[String : NSObject]] = tags.flatMap { $0.dictionaryRepresentation() }
+        case .expandedTemplates(let body, let tags, let title):
+            let tags: [[AnyHashable : Any]] = tags.flatMap { $0.dictionaryRepresentation() }
             return [
                 "body" : body,
                 "tags" : tags,
                 "title" : title
             ]
-        case .Items(let body, let coediting, let gist, let `private`, let tags, let title, let tweet):
-            let tags: [[String : NSObject]] = tags.flatMap { $0.dictionaryRepresentation() }
+        case .items(let body, let coediting, let gist, let `private`, let tags, let title, let tweet):
+            let tags: [[AnyHashable : Any]] = tags.flatMap { $0.dictionaryRepresentation() }
             return [
                 "body" : body,
                 "coediting" : coediting,

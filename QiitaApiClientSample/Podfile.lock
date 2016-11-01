@@ -1,7 +1,7 @@
 PODS:
-  - MisterFusion (1.2.2)
+  - MisterFusion (2.0.1)
   - QiitaApiClient (0.1.0):
-    - MisterFusion (~> 1.2)
+    - MisterFusion (~> 2.0.0)
 
 DEPENDENCIES:
   - QiitaApiClient (from `../`)
@@ -11,7 +11,9 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  MisterFusion: f979335323ddd5fb13c889e98ce34fe30489b8d7
-  QiitaApiClient: d8fbd24348be9329605e1d4398063d1968a670b7
+  MisterFusion: d42cac7afe8318c282bcda93396eba0aef45d30e
+  QiitaApiClient: a124cba5063ebe9e51dc04c6ce9988f315a2f159
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 9ced15bd24a166dd0c17d8f958c1385b7b47a0f7
+
+COCOAPODS: 1.1.0.rc.2

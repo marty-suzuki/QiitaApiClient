@@ -8,49 +8,51 @@
 
 import Foundation
 
-extension NSMutableURLRequest {
-    static private let baseURL = "https://qiita.com/api/v2"
+extension URLRequest {
+    private struct Const {
+        static let baseURL = "https://qiita.com/api/v2"
+    }
     
-    convenience init?(method: QiitaHttpMethod) {
-        let values: (method: String, path: String, httpBody: NSData?, contentType: String?)
+    init?(method: QiitaHttpMethod) {
+        let values: (method: String, path: String, httpBody: Data?, contentType: String?)
         switch method {
-        case .Get(let path):
+        case .get(let path):
             values = (method: "GET", path: path.absoluteString, httpBody: nil, contentType: nil)
-        case .Post(let path):
+        case .post(let path):
             do {
-                let httpBody = try NSJSONSerialization.dataWithJSONObject(path.dictionary, options: .PrettyPrinted)
+                let httpBody = try JSONSerialization.data(withJSONObject: path.dictionary, options: .prettyPrinted)
                 values = (method: "POST", path: path.pathString, httpBody: httpBody, contentType: "application/json")
             } catch let e as NSError {
                 return nil
             }
-        case .Delete(let path):
+        case .delete(let path):
              values = (method: "DELETE", path: path.pathString, httpBody: nil, contentType: nil)
-        case .Patch(let path):
+        case .patch(let path):
             do {
-                let httpBody = try NSJSONSerialization.dataWithJSONObject(path.dictionary, options: .PrettyPrinted)
+                let httpBody = try JSONSerialization.data(withJSONObject: path.dictionary, options: .prettyPrinted)
                 values = (method: "PATHC", path: path.pathString, httpBody: httpBody, contentType: "application/json")
             } catch let e as NSError {
                 return nil
             }
-        case .Put(let path):
+        case .put(let path):
              values = (method: "PUT", path: path.pathString, httpBody: nil, contentType: nil)
         }
         
-        guard let URL = NSURL(string: NSMutableURLRequest.baseURL + values.path) else {
+        guard let URL = URL(string: Const.baseURL + values.path) else {
             return nil
         }
-        self.init(URL: URL)
-        if let accessToken = QiitaApplicationInfo.sharedInfo.accessToken {
+        self.init(url: URL)
+        if let accessToken = QiitaApplicationInfo.default.accessToken {
             self.setAccessToken(accessToken)
         }
-        self.HTTPMethod = values.method
-        self.HTTPBody = values.httpBody
+        self.httpMethod = values.method
+        self.httpBody = values.httpBody
         if let contentType = values.contentType {
             self.setValue(contentType, forHTTPHeaderField: "Content-Type")
         }
     }
     
-    func setAccessToken(accessToken: String?) {
+    mutating func setAccessToken(_ accessToken: String?) {
         guard let accessToken = accessToken else { return }
         setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
     }

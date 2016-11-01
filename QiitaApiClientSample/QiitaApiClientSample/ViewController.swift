@@ -19,8 +19,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var loadAuthorizedUserButton: UIButton!
     
-    private var items: [QiitaItem] = []
-    private var stockCounts: [String : Int] = [:]
+    fileprivate var items: [QiitaItem] = []
+    fileprivate var stockCounts: [String : Int] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +28,7 @@ class ViewController: UIViewController {
         imageView.layer.cornerRadius = 8
         imageView.clipsToBounds = true
         let identifier = ItemTableViewCell.reuseIdentifier
-        tableView.registerNib(UINib(nibName: identifier, bundle: nil), forCellReuseIdentifier: identifier)
+        tableView.register(UINib(nibName: identifier, bundle: nil), forCellReuseIdentifier: identifier)
         tableView.estimatedRowHeight = 70
         tableView.dataSource = self
         tableView.delegate = self
@@ -39,65 +39,65 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    private func fetchAuthenticatedUser() {
-        let method: QiitaHttpMethod = .Get(.AuthenticatedUser)
-        QiitaApiClient.sharedClient.request(method) { (response: QiitaResponse<QiitaAuthenticatedUser>) in
+    fileprivate func fetchAuthenticatedUser() {
+        let method: QiitaHttpMethod = .get(.authenticatedUser)
+        QiitaApiClient.default.request(method) { (response: QiitaResponse<QiitaAuthenticatedUser>) in
             switch response.result {
-            case .Success(let model):
-                dispatch_async(dispatch_get_main_queue()) {
+            case .success(let model):
+                DispatchQueue.main.async {
                     self.nameLabel.text = model.name
                     self.userNameLabel.text = "@" + model.id
                     self.indicator.startAnimating()
-                    self.loadAuthorizedUserButton.setTitle("Load", forState: .Normal)
+                    self.loadAuthorizedUserButton.setTitle("Load", for: UIControlState())
                 }
                 self.fetchUserIcon(model.profileImageUrl)
                 self.fetchAuthenticatedUserItems()
-            case .Failure(let error):
+            case .failure(let error):
                 print(error)
             }
         }
     }
     
-    private func fetchAuthenticatedUserItems() {
-        let method: QiitaHttpMethod = .Get(.AuthenticatedUserItems(page: 1, perPage: 100))
-        QiitaApiClient.sharedClient.request(method) { (response: QiitaResponse<[QiitaItem]>) in
+    fileprivate func fetchAuthenticatedUserItems() {
+        let method: QiitaHttpMethod = .get(.authenticatedUserItems(page: 1, perPage: 100))
+        QiitaApiClient.default.request(method) { (response: QiitaResponse<[QiitaItem]>) in
             switch response.result {
-            case .Success(let models):
+            case .success(let models):
                 self.items = models
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
-            case .Failure(let error):
+            case .failure(let error):
                 print(error)
             }
         }
     }
     
-    private func fetchUserIcon(url: NSURL) {
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithURL(url) { data, response, error in
-            dispatch_async(dispatch_get_main_queue()) {
+    fileprivate func fetchUserIcon(_ url: URL) {
+        let session = URLSession.shared
+        let task = session.dataTask(with: url, completionHandler: { data, response, error in
+            DispatchQueue.main.async {
                 if let data = data {
                     self.imageView.image = UIImage(data: data)
                 }
                 self.indicator.stopAnimating()
             }
-        }
+        }) 
         task.resume()
     }
     
-    @IBAction func didTapLoadAuthorizedUser(sender: UIButton) {
+    @IBAction func didTapLoadAuthorizedUser(_ sender: UIButton) {
         fetchAuthenticatedUser()
     }
 }
 
 extension ViewController: UITableViewDataSource {
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(ItemTableViewCell.reuseIdentifier) as! ItemTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: ItemTableViewCell.reuseIdentifier) as! ItemTableViewCell
         let item = items[indexPath.row]
         cell.titleLabel.text = item.title
         return cell
@@ -105,10 +105,10 @@ extension ViewController: UITableViewDataSource {
 }
 
 extension ViewController: UITableViewDelegate {
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
         let url = items[indexPath.row].url
-        let vc = SFSafariViewController(URL: url)
-        presentViewController(vc, animated: true, completion: nil)
+        let vc = SFSafariViewController(url: url)
+        present(vc, animated: true, completion: nil)
     }
 }

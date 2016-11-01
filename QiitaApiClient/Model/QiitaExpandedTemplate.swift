@@ -8,15 +8,15 @@
 
 import Foundation
 
-public class QiitaExpandedTemplate: QiitaModel {
-    public let expandedBody: String
-    public let expandedTags: [QiitaTagging]
-    public let expandedTitle: String
+open class QiitaExpandedTemplate: QiitaModel {
+    open let expandedBody: String
+    open let expandedTags: [QiitaTagging]
+    open let expandedTitle: String
     
-    public required init?(dictionary: [String : NSObject]) {
+    public required init?(dictionary: [AnyHashable : Any]) {
         guard
             let expandedBody = dictionary["expanded_body"] as? String,
-            let rawExpandedTags = dictionary["expanded_tags"] as? [[String : NSObject]],
+            let rawExpandedTags = dictionary["expanded_tags"] as? [[AnyHashable : Any]],
             let expandedTitle = dictionary["expanded_title"] as? String
         else {
             return nil

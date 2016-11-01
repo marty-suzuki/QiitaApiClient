@@ -8,24 +8,24 @@
 
 import Foundation
 
-public class QiitaUser: QiitaModel {
-    public let description: String?
-    public let facebookId: String?
-    public let followeesCount: Int
-    public let followersCount: Int
-    public let githubLoginName: String?
-    public let id: String
-    public let itemsCount: Int
-    public let linkedinId: String?
-    public let location: String?
-    public let name: String?
-    public let organization: String?
-    public let permanentId: Int
-    public let profileImageUrl: NSURL
-    public let twitterScreenName: String?
-    public let websiteUrl: NSURL?
+open class QiitaUser: QiitaModel {
+    open let description: String?
+    open let facebookId: String?
+    open let followeesCount: Int
+    open let followersCount: Int
+    open let githubLoginName: String?
+    open let id: String
+    open let itemsCount: Int
+    open let linkedinId: String?
+    open let location: String?
+    open let name: String?
+    open let organization: String?
+    open let permanentId: Int
+    open let profileImageUrl: URL
+    open let twitterScreenName: String?
+    open let websiteUrl: URL?
     
-    public required init?(dictionary: [String : NSObject]) {
+    public required init?(dictionary: [AnyHashable : Any]) {
         guard
             let followeesCount = dictionary["followees_count"] as? Int,
             let followersCount = dictionary["followers_count"] as? Int,
@@ -33,7 +33,7 @@ public class QiitaUser: QiitaModel {
             let itemsCount = dictionary["items_count"] as? Int,
             let permanentId = dictionary["permanent_id"] as? Int,
             let rawProfileImageUrl = dictionary["profile_image_url"] as? String,
-            let profileImageUrl = NSURL(string: rawProfileImageUrl)
+            let profileImageUrl = URL(string: rawProfileImageUrl)
         else {
             return nil
         }
@@ -53,7 +53,7 @@ public class QiitaUser: QiitaModel {
         self.profileImageUrl = profileImageUrl
         self.twitterScreenName = dictionary["twitter_screen_name"] as? String
         if let rawWebsiteUrl = dictionary["website_url"] as? String {
-            self.websiteUrl = NSURL(string: rawProfileImageUrl)
+            self.websiteUrl = URL(string: rawProfileImageUrl)
         } else {
             self.websiteUrl = nil
         }

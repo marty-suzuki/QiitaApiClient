@@ -8,23 +8,23 @@
 
 import Foundation
 
-public class QiitaGroup: QiitaModel {
-    public let createdAt: NSDate
-    public let id: Int
-    public let name: String
-    public let `private`: Bool
-    public let updatedAt: NSDate
-    public let urlName: String
+open class QiitaGroup: QiitaModel {
+    open let createdAt: Date
+    open let id: Int
+    open let name: String
+    open let `private`: Bool
+    open let updatedAt: Date
+    open let urlName: String
     
-    public required init?(dictionary: [String : NSObject]) {
+    public required init?(dictionary: [AnyHashable : Any]) {
        guard
             let rawCreatedAt = dictionary["created_at"] as? String,
-            let createdAt = NSDate.dateFromISO8601String(rawCreatedAt),
+            let createdAt = Date.dateFromISO8601String(rawCreatedAt),
             let id = dictionary["id"] as? Int,
             let name = dictionary["name"] as? String,
             let `private` = dictionary["private"] as? Bool,
             let rawUpdatedAt = dictionary["updated_at"] as? String,
-            let updatedAt = NSDate.dateFromISO8601String(rawUpdatedAt),
+            let updatedAt = Date.dateFromISO8601String(rawUpdatedAt),
             let urlName = dictionary["url_name"] as? String
         else {
             return nil

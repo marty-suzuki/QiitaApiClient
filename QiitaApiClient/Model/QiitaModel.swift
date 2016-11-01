@@ -9,5 +9,5 @@
 import Foundation
 
 public protocol QiitaModel {
-    init?(dictionary: [String : NSObject])
+    init?(dictionary: [AnyHashable : Any])
 }

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'QiitaApiClient'
-  s.version          = '0.1.0'
+  s.version          = '0.2.0'
   s.summary          = 'API client for http://qiita.com/.'
 
 # This description is used to generate tags and improve search results.
@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
 #  TODO: Add long description of the pod here.
 #                       DESC
 
-  s.homepage         = 'https://github.com/szk-atmosphere/QiitaApiClient'
+  s.homepage         = 'https://github.com/marty-suzuki/QiitaApiClient'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'marty-suzuki' => 's1180183@gmail.com' }
   s.source           = { :git => 'https://github.com/marty-suzuki/QiitaApiClient.git', :tag => s.version.to_s }
@@ -37,5 +37,5 @@ Pod::Spec.new do |s|
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   s.frameworks = 'UIKit', 'WebKit'
-  s.dependency 'MisterFusion', '~> 1.2'
+  s.dependency 'MisterFusion', '~> 2.0.0'
 end

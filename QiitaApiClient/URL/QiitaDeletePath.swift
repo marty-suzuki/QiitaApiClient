@@ -9,41 +9,41 @@
 import Foundation
 
 public enum QiitaDeletePath: QiitaPathStringReturnable {
-    case AccessTokens(accessToken: String)
-    case CommentsCommentId(commentId: String)
-    case CommentsCommentIdThank(commentId: String)
-    case ItemsItemIdTaggingsTaggingId(itemId: String, taggingId: Int)
-    case TagsTagIdFollowing(tagId: Int)
-    case TemplatesTemplateId(templateId: Int)
-    case ProjectsProjectId(progectId: Int)
-    case UsersUserIdFollowing(userId: String)
-    case ItemsItemId(itemId: String)
-    case ItemsItemIdLike(itemId: String)
-    case ItemsItemIdStock(itemId: String)
+    case accessTokens(accessToken: String)
+    case commentsCommentId(commentId: String)
+    case commentsCommentIdThank(commentId: String)
+    case itemsItemIdTaggingsTaggingId(itemId: String, taggingId: Int)
+    case tagsTagIdFollowing(tagId: Int)
+    case templatesTemplateId(templateId: Int)
+    case projectsProjectId(progectId: Int)
+    case usersUserIdFollowing(userId: String)
+    case itemsItemId(itemId: String)
+    case itemsItemIdLike(itemId: String)
+    case itemsItemIdStock(itemId: String)
     
     var pathString: String {
         switch self {
-        case .AccessTokens(let accessToken):
+        case .accessTokens(let accessToken):
             return "/access_tokens/" + accessToken
-        case .CommentsCommentId(let commentId):
+        case .commentsCommentId(let commentId):
             return "/comments/\(commentId)"
-        case .CommentsCommentIdThank(let commentId):
+        case .commentsCommentIdThank(let commentId):
             return "/comments/\(commentId)/thank"
-        case .ItemsItemIdTaggingsTaggingId(let itemId, let taggingId):
+        case .itemsItemIdTaggingsTaggingId(let itemId, let taggingId):
             return "/items/\(itemId)/taggings/\(taggingId)"
-        case .TagsTagIdFollowing(let tagId):
+        case .tagsTagIdFollowing(let tagId):
             return "/tags/\(tagId)/following"
-        case .TemplatesTemplateId(let templateId):
+        case .templatesTemplateId(let templateId):
             return "/templates/\(templateId)"
-        case .ProjectsProjectId(let progectId):
+        case .projectsProjectId(let progectId):
             return "/projects/\(progectId)"
-        case .UsersUserIdFollowing(let userId):
+        case .usersUserIdFollowing(let userId):
             return "/users/\(userId)/following"
-        case .ItemsItemId(let itemId):
+        case .itemsItemId(let itemId):
             return "/items/" + itemId
-        case .ItemsItemIdLike(let itemId):
+        case .itemsItemIdLike(let itemId):
             return "/items/\(itemId)/like"
-        case .ItemsItemIdStock(let itemId):
+        case .itemsItemIdStock(let itemId):
             return "/items/\(itemId)/stock"
         }
     }

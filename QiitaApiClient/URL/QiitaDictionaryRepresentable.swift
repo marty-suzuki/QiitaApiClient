@@ -9,5 +9,5 @@
 import Foundation
 
 protocol QiitaDictionaryRepresentable {
-    var dictionary: [String : NSObject] { get }
+    var dictionary: [AnyHashable : Any] { get }
 }

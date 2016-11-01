@@ -9,48 +9,48 @@
 import Foundation
 
 public enum QiitaPatchPath: QiitaPathStringReturnable, QiitaDictionaryRepresentable {
-    case CommentsCommentId(commentId: String, body: String)
-    case TemplatesTemplateId(templateId: Int, body: String, name: String, tags: [QiitaTagging], title: String)
-    case ProjectsProjectId(progectId: Int, archived: Bool, body: String, name: String, tags: [QiitaTagging])
-    case ItemsItemId(itemId: String, body: String, coediting: Bool, `private`: Bool, tags: [QiitaTagging], title: String)
+    case commentsCommentId(commentId: String, body: String)
+    case templatesTemplateId(templateId: Int, body: String, name: String, tags: [QiitaTagging], title: String)
+    case projectsProjectId(progectId: Int, archived: Bool, body: String, name: String, tags: [QiitaTagging])
+    case itemsItemId(itemId: String, body: String, coediting: Bool, `private`: Bool, tags: [QiitaTagging], title: String)
     
     var pathString: String {
         switch self {
-        case .CommentsCommentId(let commentId, _):
+        case .commentsCommentId(let commentId, _):
             return "/comments/\(commentId)"
-        case .TemplatesTemplateId(let templateId, _, _, _, _):
+        case .templatesTemplateId(let templateId, _, _, _, _):
             return "/templates/\(templateId)"
-        case .ProjectsProjectId(let progectId, _, _, _, _):
+        case .projectsProjectId(let progectId, _, _, _, _):
             return "/projects/\(progectId)"
-        case .ItemsItemId(let itemId, _, _, _, _, _):
+        case .itemsItemId(let itemId, _, _, _, _, _):
             return "/items/" + itemId
         }
     }
     
-    var dictionary: [String : NSObject] {
+    var dictionary: [AnyHashable : Any] {
         switch self {
-        case .CommentsCommentId(_, let body):
+        case .commentsCommentId(_, let body):
             return [
                 "body": body
             ]
-        case .TemplatesTemplateId(_, let body, let name, let tags, let title):
-            let tags: [[String : NSObject]] = tags.flatMap { $0.dictionaryRepresentation() }
+        case .templatesTemplateId(_, let body, let name, let tags, let title):
+            let tags: [[AnyHashable : Any]] = tags.flatMap { $0.dictionaryRepresentation() }
             return [
                 "body" : body,
                 "name" : name,
                 "tags" : tags,
                 "title" : title
             ]
-        case .ProjectsProjectId(_, let archived, let body, let name, let tags):
-            let tags: [[String : NSObject]] = tags.flatMap { $0.dictionaryRepresentation() }
+        case .projectsProjectId(_, let archived, let body, let name, let tags):
+            let tags: [[AnyHashable : Any]] = tags.flatMap { $0.dictionaryRepresentation() }
             return [
                 "archived" : archived,
                 "body" : body,
                 "name" : name,
                 "tags" : tags
             ]
-        case .ItemsItemId(_, let body, let coediting, let `private`, let tags, let title):
-            let tags: [[String : NSObject]] = tags.flatMap { $0.dictionaryRepresentation() }
+        case .itemsItemId(_, let body, let coediting, let `private`, let tags, let title):
+            let tags: [[AnyHashable : Any]] = tags.flatMap { $0.dictionaryRepresentation() }
             return [
                 "body" : body,
                 "coediting" : coediting,

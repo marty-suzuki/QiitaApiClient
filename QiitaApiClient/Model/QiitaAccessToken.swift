@@ -9,18 +9,18 @@
 import Foundation
 
 public enum QiitaAuthorizeScope: String {
-    case ReadQiita      = "read_qiita"
-    case ReadQiitaTeam  = "read_qiita_team"
-    case WriteQiita     = "write_qiita"
-    case WriteQiitaTeam = "write_qiita_team"
+    case readQiita      = "read_qiita"
+    case readQiitaTeam  = "read_qiita_team"
+    case writeQiita     = "write_qiita"
+    case writeQiitaTeam = "write_qiita_team"
 }
 
-public class QiitaAccessToken: QiitaModel {
-    public let clientId: String
-    public let scopes: [QiitaAuthorizeScope]
-    public let token: String
+open class QiitaAccessToken: QiitaModel {
+    open let clientId: String
+    open let scopes: [QiitaAuthorizeScope]
+    open let token: String
     
-    public required init?(dictionary: [String : NSObject]) {
+    public required init?(dictionary: [AnyHashable : Any]) {
         guard
             let clientId = dictionary["client_id"] as? String,
             let rawScopes = dictionary["scopes"] as? [String],
