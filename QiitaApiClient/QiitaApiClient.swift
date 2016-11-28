@@ -8,9 +8,48 @@
 
 import UIKit
 
-open class QiitaApiClient {
+public enum Result<T> {
+    case success(T)
+    case failure(Error)
+}
+
+public struct Response<T> {
+    public let result: Result<T>
+    public let urlResponse: HTTPURLResponse?
+    public let urlRequest: URLRequest?
+    public let statusCode: StatusCode?
+    public let data: Data?
+}
+
+public enum StatusCode: Int {
+    case unknown = 0
+    //success
+    case ok = 200
+    case created = 201
+    case accepted = 203
+    case noContent = 204
+    //client error
+    case badRequest = 400
+    case unauthorized = 401
+    case forbidden = 403
+    case notFound = 404
+    //server error
+    case internalServerError = 500
+}
+
+public enum QiitaAPIClientError: Error {
+    case noData
+    case invalidURL
+    case invalidRange(reason: String)
+    case decodeFailed(reason: String)
+    case statucCode(StatusCode)
+    case invalidAccessToken
+    case invalidResponseHeaderField(String)
+}
+
+public class QiitaApiClient {
     //MARK: - Static constant
-    open static let `default` = QiitaApiClient()
+    public static let `default` = QiitaApiClient()
     
     //MARK: - Properties
     fileprivate let session = URLSession(configuration: .default)
@@ -19,6 +58,81 @@ open class QiitaApiClient {
     //MARK: - Initializer
     fileprivate init() {}
     
+    //MARK: - New
+    func send<Request: QiitaRequestable>(request: Request, completion: @escaping (Response<Request.ResultType>) -> ()) {
+        do {
+            try request.validate()
+        } catch let error {
+            completion(Response(result: .failure(error), urlResponse: nil, urlRequest: nil, statusCode: nil, data: nil))
+        }
+        guard let url = URL(string: request.urlString()) else {
+            completion(Response(result: .failure(QiitaAPIClientError.invalidURL), urlResponse: nil, urlRequest: nil, statusCode: nil, data: nil))
+            return
+        }
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = request.httpMethod.rawValue
+        
+        switch request.httpMethod {
+        case .post, .patch:
+            do {
+                urlRequest.httpBody = try JSONSerialization.data(withJSONObject: request.parameters, options: .prettyPrinted)
+                urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            } catch let error {
+                completion(Response(result: .failure(error), urlResponse: nil, urlRequest: nil, statusCode: nil, data: nil))
+                return
+            }
+        default:
+            break
+        }
+        
+        if request.useAccessToken {
+            guard let accessToken = QiitaApplicationInfo.default.accessToken else {
+                completion(Response(result: .failure(QiitaAPIClientError.invalidAccessToken), urlResponse: nil, urlRequest: nil, statusCode: nil, data: nil))
+                return
+            }
+            urlRequest.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
+        }
+        
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        let task = session.dataTask(with: urlRequest) { [urlRequest] data, response, error in
+            DispatchQueue.main.async {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            }
+            let urlResponse = response as? HTTPURLResponse
+            let statusCode = StatusCode(rawValue: urlResponse?.statusCode ?? 0) ?? .unknown
+            if let error = error {
+                completion(Response(result: .failure(error), urlResponse: urlResponse, urlRequest: urlRequest, statusCode: statusCode, data: data))
+                return
+            }
+            guard let data = data else {
+                completion(Response(result: .failure(QiitaAPIClientError.noData), urlResponse: urlResponse, urlRequest: urlRequest, statusCode: statusCode, data: nil))
+                return
+            }
+            switch statusCode.rawValue {
+            case StatusCode.ok.rawValue...StatusCode.noContent.rawValue:
+                break
+                
+            case StatusCode.unauthorized.rawValue:
+                QiitaApplicationInfo.default.accessToken = nil
+                fallthrough
+                
+            default:
+                completion(Response(result: .failure(QiitaAPIClientError.statucCode(statusCode)), urlResponse: urlResponse, urlRequest: urlRequest, statusCode: statusCode, data: data))
+                return
+            }
+            do {
+                let decodedResult = try Request.decode(data: data)
+                completion(Response(result: .success(decodedResult), urlResponse: urlResponse, urlRequest: urlRequest, statusCode: statusCode, data: data))
+                return
+            } catch let error {
+                completion(Response(result: .failure(error), urlResponse: urlResponse, urlRequest: urlRequest, statusCode: statusCode, data: data))
+                return
+            }
+        }
+        task.resume()
+    }
+    
+    //MARK: - Old
     fileprivate func checkCode(_ needAuthenticate: Bool, success: (() -> ())?, failure: ((HTTPURLResponse?, Error) -> ())?) {
         if !needAuthenticate {
             success?()
