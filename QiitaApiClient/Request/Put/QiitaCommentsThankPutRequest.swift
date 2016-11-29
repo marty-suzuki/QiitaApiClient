@@ -25,8 +25,4 @@ public struct QiitaCommentsThankPutRequest: QiitaPutRequestable {
     }
     
     public func validate() throws {}
-    
-    public static func decode(data: Data) throws -> ResultType {
-        return try decode(data: data)
-    }
 }

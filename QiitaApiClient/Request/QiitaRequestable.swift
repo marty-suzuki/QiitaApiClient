@@ -67,3 +67,21 @@ extension QiitaRequestable {
 extension QiitaRequestable where ResultType == Void, DecodedJsonType == Void {
     public static func decode(data: Data) throws -> ResultType {}
 }
+
+extension QiitaRequestable where DecodedJsonType == [AnyHashable : Any] {
+    public static func decode<T: QiitaModel>(data: Data) throws -> T {
+        let decodedJson = try jsonDecode(data: data)
+        guard let model = T(dictionary: decodedJson) else {
+            throw QiitaAPIClientError.decodeFailed(reason: "can not convert to \(String(describing: T.self))")
+        }
+        return model
+    }
+}
+
+extension QiitaRequestable where DecodedJsonType == [[AnyHashable : Any]] {
+    public static func decode<T: QiitaModel>(data: Data) throws -> [T] {
+        let decodedJson = try jsonDecode(data: data)
+        let models = decodedJson.flatMap { T(dictionary: $0) }
+        return models
+    }
+}

@@ -31,12 +31,4 @@ public struct QiitaCommentsPatchRequest: QiitaPatchRequestable {
     }
     
     public func validate() throws {}
-    
-    public static func decode(data: Data) throws -> ResultType {
-        let decodedJson = try jsonDecode(data: data)
-        guard let template = QiitaTemplate(dictionary: decodedJson) else {
-            throw QiitaAPIClientError.decodeFailed(reason: "can not convert to QiitaTemplate")
-        }
-        return template
-    }
 }

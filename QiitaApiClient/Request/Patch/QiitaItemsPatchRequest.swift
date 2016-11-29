@@ -44,12 +44,4 @@ public struct QiitaItemsPatchRequest: QiitaPatchRequestable {
     }
     
     public func validate() throws {}
-    
-    public static func decode(data: Data) throws -> ResultType {
-        let decodedJson = try jsonDecode(data: data)
-        guard let item = QiitaItem(dictionary: decodedJson) else {
-            throw QiitaAPIClientError.decodeFailed(reason: "can not convert to QiitaItem")
-        }
-        return item
-    }
 }
