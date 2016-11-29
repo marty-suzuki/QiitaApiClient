@@ -63,3 +63,7 @@ extension QiitaRequestable {
         return decodedResult
     }
 }
+
+extension QiitaRequestable where ResultType == Void, DecodedJsonType == Void {
+    public static func decode(data: Data) throws -> ResultType {}
+}

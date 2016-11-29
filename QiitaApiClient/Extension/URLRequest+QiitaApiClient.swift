@@ -25,13 +25,6 @@ extension URLRequest {
             } catch let e as NSError {
                 return nil
             }
-        case .patch(let path):
-            do {
-                let httpBody = try JSONSerialization.data(withJSONObject: path.dictionary, options: .prettyPrinted)
-                values = (method: "PATHC", path: path.pathString, httpBody: httpBody, contentType: "application/json")
-            } catch let e as NSError {
-                return nil
-            }
         }
         
         guard let URL = URL(string: Const.baseURL + values.path) else {

@@ -28,9 +28,9 @@ public struct QiitaCommentsThankDeleteRequest: QiitaDeleteRequestable {
     
     public static func decode(data: Data) throws -> ResultType {
         let decodedJson = try jsonDecode(data: data)
-        guard let item = QiitaComment(dictionary: decodedJson) else {
+        guard let comment = QiitaComment(dictionary: decodedJson) else {
             throw QiitaAPIClientError.decodeFailed(reason: "can not convert to QiitaComment")
         }
-        return item
+        return comment
     }
 }

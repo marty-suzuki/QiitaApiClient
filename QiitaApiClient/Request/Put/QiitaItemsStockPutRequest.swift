@@ -25,6 +25,4 @@ public struct QiitaItemsStockPutRequest: QiitaPutRequestable {
     }
     
     public func validate() throws {}
-    
-    public static func decode(data: Data) throws -> ResultType {}
 }

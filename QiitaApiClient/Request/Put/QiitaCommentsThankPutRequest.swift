@@ -27,10 +27,6 @@ public struct QiitaCommentsThankPutRequest: QiitaPutRequestable {
     public func validate() throws {}
     
     public static func decode(data: Data) throws -> ResultType {
-        let decodedJson = try jsonDecode(data: data)
-        guard let comment = QiitaComment(dictionary: decodedJson) else {
-            throw QiitaAPIClientError.decodeFailed(reason: "can not convert to QiitaAuthenticatedUser")
-        }
-        return comment
+        return try decode(data: data)
     }
 }

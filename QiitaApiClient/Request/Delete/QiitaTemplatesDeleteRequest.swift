@@ -25,6 +25,4 @@ public struct QiitaTemplatesDeleteRequest: QiitaDeleteRequestable {
     }
     
     public func validate() throws {}
-    
-    public static func decode(data: Data) throws -> ResultType {}
 }
