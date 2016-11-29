@@ -13,11 +13,10 @@ public enum QiitaHttpMethod {
     case post  (QiitaPostPath)
     case delete(QiitaDeletePath)
     case patch (QiitaPatchPath)
-    case put   (QiitaPutPath)
     
     var needAuthenticate: Bool {
         switch self {
-        case .delete, .patch, .post, .put:
+        case .delete, .patch, .post:
             return true
         case .get(let path):
             return path.needAuthenticate

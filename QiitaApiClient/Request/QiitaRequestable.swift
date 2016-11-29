@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum HttpMethod: String {
+public enum HttpMethod: String {
     case get = "GET"
     case post = "POST"
     case delete = "DELETE"
@@ -16,7 +16,7 @@ enum HttpMethod: String {
     case patch = "PATCH"
 }
 
-protocol QiitaRequestable {
+public protocol QiitaRequestable {
     associatedtype ResultType
     associatedtype DecodedJsonType
     
@@ -35,17 +35,17 @@ protocol QiitaRequestable {
 }
 
 extension QiitaRequestable {
-    var baseUrl: String {
+    public var baseUrl: String {
         return "https://qiita.com/api/v2"
     }
     
-    func parametersString() -> String {
+    public func parametersString() -> String {
         return parameters.reduce("") { (result, parameter) in
             (result.isEmpty ? "?" : result + "&") + parameter.key + "=" + String(describing: parameter.value)
         }.RFC3986Encode
     }
     
-    func urlString() -> String {
+    public func urlString() -> String {
         let urlString = baseUrl + path
         switch httpMethod {
         case .post, .patch:
@@ -55,7 +55,7 @@ extension QiitaRequestable {
         }
     }
     
-    static func jsonDecode(data: Data) throws -> DecodedJsonType {
+    public static func jsonDecode(data: Data) throws -> DecodedJsonType {
         let jsonObject = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
         guard let decodedResult = jsonObject as? DecodedJsonType else {
             throw QiitaAPIClientError.decodeFailed(reason: "not matched to \(String(describing: DecodedJsonType.self))")

@@ -34,8 +34,6 @@ extension URLRequest {
             } catch let e as NSError {
                 return nil
             }
-        case .put(let path):
-             values = (method: "PUT", path: path.pathString, httpBody: nil, contentType: nil)
         }
         
         guard let URL = URL(string: Const.baseURL + values.path) else {

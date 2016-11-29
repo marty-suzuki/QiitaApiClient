@@ -40,8 +40,9 @@ class ViewController: UIViewController {
     }
     
     fileprivate func fetchAuthenticatedUser() {
-        let method: QiitaHttpMethod = .get(.authenticatedUser)
-        QiitaApiClient.default.request(method) { (response: QiitaResponse<QiitaAuthenticatedUser>) in
+        
+        let request = QiitaAuthenticatedUserRequest()
+        QiitaApiClient.default.send(request: request) { response in
             switch response.result {
             case .success(let model):
                 DispatchQueue.main.async {

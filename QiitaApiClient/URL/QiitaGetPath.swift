@@ -29,7 +29,6 @@ public enum QiitaGetPath: QiitaPathStringReturnable {
     }
     
     case qauthAuthorize(clientId: String, scope: String, state: String?)
-    case authenticatedUser
     case itemsItemIdLikes(itemId: String)
     case commentsCommentId(commentId: String)
     case itemsItemIdComments(itemId: String)
@@ -58,20 +57,13 @@ public enum QiitaGetPath: QiitaPathStringReturnable {
     case usersUserIdStocks(userId: String, page: Int, perPage: Int)
     
     var needAuthenticate: Bool {
-        switch  self {
-        case .authenticatedUser, .authenticatedUserItems:
-            return true
-        default:
-            return false
-        }
+        return false
     }
     
     var pathString: String {
         switch self {
         case .qauthAuthorize:
             return "/oauth/authorize"
-        case .authenticatedUser:
-            return "/authenticated_user"
         case .itemsItemIdLikes(let itemId):
             return "/items/\(itemId)/likes"
         case .commentsCommentId(let commentId):
@@ -165,7 +157,7 @@ public enum QiitaGetPath: QiitaPathStringReturnable {
             return pageParameters(page, perPage: perPage)
         case .usersUserIdStocks(_, let page, let perPage):
             return pageParameters(page, perPage: perPage)
-        case .authenticatedUser,
+        case
              .itemsItemIdLikes,
              .commentsCommentId,
              .itemsItemIdComments,

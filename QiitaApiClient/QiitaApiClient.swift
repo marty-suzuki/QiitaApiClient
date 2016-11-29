@@ -59,7 +59,7 @@ public class QiitaApiClient {
     fileprivate init() {}
     
     //MARK: - New
-    func send<Request: QiitaRequestable>(request: Request, completion: @escaping (Response<Request.ResultType>) -> ()) {
+    public func send<Request: QiitaRequestable>(request: Request, completion: @escaping (Response<Request.ResultType>) -> ()) {
         do {
             try request.validate()
         } catch let error {
