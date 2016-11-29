@@ -25,8 +25,6 @@ extension URLRequest {
             } catch let e as NSError {
                 return nil
             }
-        case .delete(let path):
-             values = (method: "DELETE", path: path.pathString, httpBody: nil, contentType: nil)
         case .patch(let path):
             do {
                 let httpBody = try JSONSerialization.data(withJSONObject: path.dictionary, options: .prettyPrinted)

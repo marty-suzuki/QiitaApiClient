@@ -22,6 +22,18 @@
 		30DC7F5617B7FF917E6D3AF87CC7FB0A /* QiitaTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC1A4305B656851E02371D62E8246FC /* QiitaTag.swift */; };
 		32EA1F30413278D1B3EAD96076C1508F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A5191292B0956D92FF6756CA299C831 /* UIKit.framework */; };
 		350A91BBB6D791B651ADE48D76D0F8D1 /* QiitaLike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2A103559785BBDA817C3F105A4C32E /* QiitaLike.swift */; };
+		37C232111DEDE68B007FA7BA /* QiitaDeleteRequestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C2320F1DEDE567007FA7BA /* QiitaDeleteRequestable.swift */; };
+		37C232131DEDE6F2007FA7BA /* QiitaItemsStockDeleteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C232121DEDE6F2007FA7BA /* QiitaItemsStockDeleteRequest.swift */; };
+		37C232151DEDE7D2007FA7BA /* QiitaItemsLikeDeleteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C232141DEDE7D2007FA7BA /* QiitaItemsLikeDeleteRequest.swift */; };
+		37C232171DEDE7EE007FA7BA /* QiitaItemsDeleteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C232161DEDE7EE007FA7BA /* QiitaItemsDeleteRequest.swift */; };
+		37C232191DEDE8E1007FA7BA /* QiitaTemplatesDeleteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C232181DEDE8E1007FA7BA /* QiitaTemplatesDeleteRequest.swift */; };
+		37C2321B1DEDE8F5007FA7BA /* QiitaProjectsDeleteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C2321A1DEDE8F5007FA7BA /* QiitaProjectsDeleteRequest.swift */; };
+		37C2321D1DEDE90F007FA7BA /* QiitaUsersFollowingDeleteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C2321C1DEDE90F007FA7BA /* QiitaUsersFollowingDeleteRequest.swift */; };
+		37C2321F1DEDE9D0007FA7BA /* QiitaItemsTaggingsDeleteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C2321E1DEDE9D0007FA7BA /* QiitaItemsTaggingsDeleteRequest.swift */; };
+		37C232211DEDE9E2007FA7BA /* QiitaTagsFollowingDeleteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C232201DEDE9E2007FA7BA /* QiitaTagsFollowingDeleteRequest.swift */; };
+		37C232231DEDEAE9007FA7BA /* QiitaAccessTokensDeleteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C232221DEDEAE9007FA7BA /* QiitaAccessTokensDeleteRequest.swift */; };
+		37C232251DEDEAFC007FA7BA /* QiitaCommentsDeleteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C232241DEDEAFC007FA7BA /* QiitaCommentsDeleteRequest.swift */; };
+		37C232271DEDEB18007FA7BA /* QiitaCommentsThankDeleteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C232261DEDEB18007FA7BA /* QiitaCommentsThankDeleteRequest.swift */; };
 		3CB3D0D06636F0C337A84944C99628AC /* QiitaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC4BFFEFBEA7E86CE75F0231DBD1EA3 /* QiitaItem.swift */; };
 		424F23C298434CAB0EAC27DE656987C4 /* QiitaAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74759A6CB1E230E4065A09758C3D9243 /* QiitaAccessToken.swift */; };
 		468AEA5BBA2E61BE02873A3FB2D6ADD8 /* String+RFC3986Encode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749486C9682CBDBC5793087AA722D3A6 /* String+RFC3986Encode.swift */; };
@@ -61,7 +73,6 @@
 		EE2DFEB7C57A3BD667D130DEA6718547 /* MisterFusion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4088D047289A0B346219868CDB5DDC /* MisterFusion.framework */; };
 		F098BBE19BDB0427B2002D03040295AA /* QiitaPostPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6631F5CB4B94FC35298AC9C6C4E7C5 /* QiitaPostPath.swift */; };
 		F23D0CC4CA98CF962C31BB48A7339ECF /* QiitaApiClient-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 31E7F53E873A80AFC066D597E37A4256 /* QiitaApiClient-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F5794A362AF5AFF3F3EA648BD283E739 /* QiitaDeletePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03678F81563735FB90D31FD0449E808 /* QiitaDeletePath.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +111,18 @@
 		25BF54DF57F22D3FDE69A8450BD014A0 /* Pods-QiitaApiClientSample-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-QiitaApiClientSample-acknowledgements.markdown"; sourceTree = "<group>"; };
 		2AB75F5D47AEC97C23DC8BEA7FBCCF47 /* QiitaURLQueryParameter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QiitaURLQueryParameter.swift; sourceTree = "<group>"; };
 		31E7F53E873A80AFC066D597E37A4256 /* QiitaApiClient-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "QiitaApiClient-umbrella.h"; sourceTree = "<group>"; };
+		37C2320F1DEDE567007FA7BA /* QiitaDeleteRequestable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiitaDeleteRequestable.swift; sourceTree = "<group>"; };
+		37C232121DEDE6F2007FA7BA /* QiitaItemsStockDeleteRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiitaItemsStockDeleteRequest.swift; sourceTree = "<group>"; };
+		37C232141DEDE7D2007FA7BA /* QiitaItemsLikeDeleteRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiitaItemsLikeDeleteRequest.swift; sourceTree = "<group>"; };
+		37C232161DEDE7EE007FA7BA /* QiitaItemsDeleteRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiitaItemsDeleteRequest.swift; sourceTree = "<group>"; };
+		37C232181DEDE8E1007FA7BA /* QiitaTemplatesDeleteRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiitaTemplatesDeleteRequest.swift; sourceTree = "<group>"; };
+		37C2321A1DEDE8F5007FA7BA /* QiitaProjectsDeleteRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiitaProjectsDeleteRequest.swift; sourceTree = "<group>"; };
+		37C2321C1DEDE90F007FA7BA /* QiitaUsersFollowingDeleteRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiitaUsersFollowingDeleteRequest.swift; sourceTree = "<group>"; };
+		37C2321E1DEDE9D0007FA7BA /* QiitaItemsTaggingsDeleteRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiitaItemsTaggingsDeleteRequest.swift; sourceTree = "<group>"; };
+		37C232201DEDE9E2007FA7BA /* QiitaTagsFollowingDeleteRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiitaTagsFollowingDeleteRequest.swift; sourceTree = "<group>"; };
+		37C232221DEDEAE9007FA7BA /* QiitaAccessTokensDeleteRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiitaAccessTokensDeleteRequest.swift; sourceTree = "<group>"; };
+		37C232241DEDEAFC007FA7BA /* QiitaCommentsDeleteRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiitaCommentsDeleteRequest.swift; sourceTree = "<group>"; };
+		37C232261DEDEB18007FA7BA /* QiitaCommentsThankDeleteRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiitaCommentsThankDeleteRequest.swift; sourceTree = "<group>"; };
 		385A0D2BDFBCAE996A9AFA84694F36C7 /* Pods-QiitaApiClientSample-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-QiitaApiClientSample-frameworks.sh"; sourceTree = "<group>"; };
 		3A79C565779D7F5EB4FC170D49305AC6 /* Pods-QiitaApiClientSample-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-QiitaApiClientSample-umbrella.h"; sourceTree = "<group>"; };
 		3CE6964EDBE5093F03E8E2B78CC968F7 /* QiitaAuthenticatedUser.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QiitaAuthenticatedUser.swift; sourceTree = "<group>"; };
@@ -150,7 +173,6 @@
 		C9AA9BD834F18D321859ACB6924FD0C6 /* NSError+QiitaApiClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "NSError+QiitaApiClient.swift"; sourceTree = "<group>"; };
 		C9DAAE9B39E96F7CF9E96A24DF9450E3 /* QiitaApiClient-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "QiitaApiClient-dummy.m"; sourceTree = "<group>"; };
 		D0028AD92BEB6711AE873F6A24F06FF7 /* MisterFusion-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MisterFusion-umbrella.h"; sourceTree = "<group>"; };
-		D03678F81563735FB90D31FD0449E808 /* QiitaDeletePath.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QiitaDeletePath.swift; sourceTree = "<group>"; };
 		D0A5D5A2E53C45811B22FD71C67902F7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		DDC137CFCB403631AA559E1B6E7C1497 /* QiitaApplicationInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QiitaApplicationInfo.swift; sourceTree = "<group>"; };
 		DE503BB9FA087B4D1044E89C0F02C1DA /* Array+MisterFusion.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Array+MisterFusion.swift"; path = "MisterFusion/Array+MisterFusion.swift"; sourceTree = "<group>"; };
@@ -225,6 +247,25 @@
 			path = ../..;
 			sourceTree = "<group>";
 		};
+		37C2320E1DEDE556007FA7BA /* Delete */ = {
+			isa = PBXGroup;
+			children = (
+				37C2320F1DEDE567007FA7BA /* QiitaDeleteRequestable.swift */,
+				37C232121DEDE6F2007FA7BA /* QiitaItemsStockDeleteRequest.swift */,
+				37C232141DEDE7D2007FA7BA /* QiitaItemsLikeDeleteRequest.swift */,
+				37C232161DEDE7EE007FA7BA /* QiitaItemsDeleteRequest.swift */,
+				37C232181DEDE8E1007FA7BA /* QiitaTemplatesDeleteRequest.swift */,
+				37C2321A1DEDE8F5007FA7BA /* QiitaProjectsDeleteRequest.swift */,
+				37C2321C1DEDE90F007FA7BA /* QiitaUsersFollowingDeleteRequest.swift */,
+				37C2321E1DEDE9D0007FA7BA /* QiitaItemsTaggingsDeleteRequest.swift */,
+				37C232201DEDE9E2007FA7BA /* QiitaTagsFollowingDeleteRequest.swift */,
+				37C232221DEDEAE9007FA7BA /* QiitaAccessTokensDeleteRequest.swift */,
+				37C232241DEDEAFC007FA7BA /* QiitaCommentsDeleteRequest.swift */,
+				37C232261DEDEB18007FA7BA /* QiitaCommentsThankDeleteRequest.swift */,
+			);
+			path = Delete;
+			sourceTree = "<group>";
+		};
 		3BA1C64B92291EEB2678D8D8A8ECE155 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -247,7 +288,6 @@
 		57D3C9050372DB38C3106CB569847E95 /* URL */ = {
 			isa = PBXGroup;
 			children = (
-				D03678F81563735FB90D31FD0449E808 /* QiitaDeletePath.swift */,
 				E5A31B1563AAAD311317D4DF2548E57E /* QiitaDictionaryRepresentable.swift */,
 				A26D9BF89BCED3FFCB60F1FDC311D7EB /* QiitaGetPath.swift */,
 				13A632708EDA755A4562515CEA4F293E /* QiitaHttpMethod.swift */,
@@ -335,6 +375,7 @@
 			isa = PBXGroup;
 			children = (
 				9D2AA1521DEC18B0000CDA98 /* QiitaRequestable.swift */,
+				37C2320E1DEDE556007FA7BA /* Delete */,
 				9D54D70A1DED7D5200AC5B4E /* Put */,
 				9D2AA1551DEC1AC4000CDA98 /* Get */,
 			);
@@ -538,32 +579,42 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37C232231DEDEAE9007FA7BA /* QiitaAccessTokensDeleteRequest.swift in Sources */,
 				E97F9E74E57FC9A67E6FA5B159EA2E51 /* Date+ISO8601.swift in Sources */,
+				37C232191DEDE8E1007FA7BA /* QiitaTemplatesDeleteRequest.swift in Sources */,
+				37C2321B1DEDE8F5007FA7BA /* QiitaProjectsDeleteRequest.swift in Sources */,
 				9D2AA1591DEC1CBD000CDA98 /* QiitaGetRequestable.swift in Sources */,
 				9D54D7131DED82F400AC5B4E /* QiitaItemsStockPutRequest.swift in Sources */,
 				ACBA5D73F205E26F332E28F6284A62D2 /* NSError+QiitaApiClient.swift in Sources */,
 				AA67D38394BDB29991AF648478FFF905 /* HTTPURLResponse+QiitaApiClient.swift in Sources */,
 				A3F1F4CB1BF5CD0FF85CB9384100C562 /* URLRequest+QiitaApiClient.swift in Sources */,
+				37C2321D1DEDE90F007FA7BA /* QiitaUsersFollowingDeleteRequest.swift in Sources */,
 				424F23C298434CAB0EAC27DE656987C4 /* QiitaAccessToken.swift in Sources */,
 				5CF1303B9173E578AE1269B703DB758A /* QiitaApiClient-dummy.m in Sources */,
+				37C232171DEDE7EE007FA7BA /* QiitaItemsDeleteRequest.swift in Sources */,
 				2FD74BB7812452893339477FF842B60D /* QiitaApiClient.swift in Sources */,
 				BFA709420A0BEB2439AA3CF670435EBB /* QiitaApplicationInfo.swift in Sources */,
 				C0BF13ED61FCF295442B8CC8B83E6E12 /* QiitaAuthenticatedUser.swift in Sources */,
 				53B9F373E84CB09145C579C1E1F007CF /* QiitaAuthorizeViewController.swift in Sources */,
+				37C232211DEDE9E2007FA7BA /* QiitaTagsFollowingDeleteRequest.swift in Sources */,
 				2E59795562D61DE2141B4982EAE364A4 /* QiitaComment.swift in Sources */,
-				F5794A362AF5AFF3F3EA648BD283E739 /* QiitaDeletePath.swift in Sources */,
+				37C232111DEDE68B007FA7BA /* QiitaDeleteRequestable.swift in Sources */,
 				9D54D70F1DED822600AC5B4E /* QiitaTagsFollowingPutRequest.swift in Sources */,
 				A1D5B6E1DFECEC74F015C37407B6C49E /* QiitaDictionaryRepresentable.swift in Sources */,
+				37C232151DEDE7D2007FA7BA /* QiitaItemsLikeDeleteRequest.swift in Sources */,
 				24A9F1A45EE11C53B19EF0CE69600F47 /* QiitaExpandedTemplate.swift in Sources */,
 				9D54D7151DED830D00AC5B4E /* QiitaItemsLikePutRequest.swift in Sources */,
+				37C232131DEDE6F2007FA7BA /* QiitaItemsStockDeleteRequest.swift in Sources */,
 				9D54D70D1DED7D6900AC5B4E /* QiitaPutRequestable.swift in Sources */,
 				C668AD0AD9B2013A8E5461319F43A45F /* QiitaGetPath.swift in Sources */,
 				262BE70C9582280E0A46FEF932B823A8 /* QiitaGroup.swift in Sources */,
+				37C2321F1DEDE9D0007FA7BA /* QiitaItemsTaggingsDeleteRequest.swift in Sources */,
 				78DFAB4AFA39E4BEE1292C5B5F13066A /* QiitaHttpMethod.swift in Sources */,
 				3CB3D0D06636F0C337A84944C99628AC /* QiitaItem.swift in Sources */,
 				350A91BBB6D791B651ADE48D76D0F8D1 /* QiitaLike.swift in Sources */,
 				647AEDBFC386EA06A7E117177E80BA2A /* QiitaModel.swift in Sources */,
 				7EA20141CBE34D0B58D91B537E069C4E /* QiitaPatchPath.swift in Sources */,
+				37C232271DEDEB18007FA7BA /* QiitaCommentsThankDeleteRequest.swift in Sources */,
 				F098BBE19BDB0427B2002D03040295AA /* QiitaPostPath.swift in Sources */,
 				9D2AA1571DEC1B39000CDA98 /* QiitaAuthenticatedUserRequest.swift in Sources */,
 				2E289179EB32395B9F7D8ACB49369981 /* QiitaProject.swift in Sources */,
@@ -578,6 +629,7 @@
 				9D2AA1541DEC198E000CDA98 /* QiitaRequestable.swift in Sources */,
 				60EB1A319D370E79DA13AE4543515AB5 /* QiitaUser.swift in Sources */,
 				128B86A312F217BC030B1610E5042414 /* QittaPathStringReturnable.swift in Sources */,
+				37C232251DEDEAFC007FA7BA /* QiitaCommentsDeleteRequest.swift in Sources */,
 				468AEA5BBA2E61BE02873A3FB2D6ADD8 /* String+RFC3986Encode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
