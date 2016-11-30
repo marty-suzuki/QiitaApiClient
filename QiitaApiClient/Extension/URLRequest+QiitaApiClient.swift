@@ -18,13 +18,6 @@ extension URLRequest {
         switch method {
         case .get(let path):
             values = (method: "GET", path: path.absoluteString, httpBody: nil, contentType: nil)
-        case .post(let path):
-            do {
-                let httpBody = try JSONSerialization.data(withJSONObject: path.dictionary, options: .prettyPrinted)
-                values = (method: "POST", path: path.pathString, httpBody: httpBody, contentType: "application/json")
-            } catch let e as NSError {
-                return nil
-            }
         }
         
         guard let URL = URL(string: Const.baseURL + values.path) else {

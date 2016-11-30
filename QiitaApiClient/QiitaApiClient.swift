@@ -312,10 +312,15 @@ public class QiitaApiClient {
             failure?(nil, NSError(errorDomain: .notFindCode))
             return
         }
-        let setAccessToken: (HTTPURLResponse, QiitaAccessToken) -> () = {
-            QiitaApplicationInfo.default.accessToken = $0.1.token
-            success?()
+        let request = QiitaAccessTokensPostRequest(clientId: info.clientId, clientSecret: info.clientSecret, code: code)
+        send(request: request) { response in
+            switch response.result {
+            case .success(let accessToken):
+                QiitaApplicationInfo.default.accessToken = accessToken.token
+                success?()
+            case .failure(let error):
+                failure?(response.urlResponse, error)
+            }
         }
-        request(.post(.accessTokens(clientId: info.clientId, clientSecret: info.clientSecret, code: code)), success: setAccessToken, failure: failure)
     }
 }
